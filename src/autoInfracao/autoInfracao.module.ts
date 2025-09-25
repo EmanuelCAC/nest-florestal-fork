@@ -5,6 +5,6 @@ import { AutoInfracaoService } from './autoInfracao.service';
 
 @Module({
   controllers: [AutoInfracaoController],
-  providers: [AutoInfracaoService]
+  providers: [AutoInfracaoService],
 })
 export class AutoInfracaoModule {}
