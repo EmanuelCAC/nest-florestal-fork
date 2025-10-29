@@ -1,8 +1,5 @@
 import {
   BadRequestException,
-  Body,
-  CanActivate,
-  Header,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -15,7 +12,8 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { extractCpfFromToken } from './middleware/verify-cpf';
 import { LoginUserDto } from 'src/user/dto/login-user.dto';
-import { tipo_usuario } from '@prisma/client';
+import { tipo_usuario } from 'src/user/entities/user.entity';
+
 
 @Injectable()
 export class AuthService {
