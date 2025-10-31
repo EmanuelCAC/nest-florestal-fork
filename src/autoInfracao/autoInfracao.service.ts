@@ -31,7 +31,6 @@ export class AutoInfracaoService {
     const relatorio = await this.prisma.relatoriodiario.create({
       data: {
         ...rest,
-        horas: new Date().getHours(),
         fiscalId: fiscal.id,
       },
     });
