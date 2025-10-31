@@ -24,10 +24,13 @@ export class AuthService {
   ) {}
 
   //criar um novo usuário
+  
   async signup(user: User) {
+    
+  const hashedCpf = await bcrypt.hash(user.cpf, 10);
     // Verificar se o usuário já existe
     const userExists = await this.prisma.fiscal.findUnique({
-      where: { cpf: user.cpf },
+      where: { cpf: hashedCpf },
     });
 
     if (userExists) {
@@ -36,11 +39,11 @@ export class AuthService {
 
     // Hash da senha para segurança
     const hashedPassword = await bcrypt.hash(user.senha, 10);
-
+  
     // Criar o novo usuário
     const newUser = await this.prisma.fiscal.create({
       data: {
-        cpf: user.cpf,
+        cpf: hashedCpf,
         nome: user.nome,
         senha: hashedPassword,
         tipo: tipo_usuario[user.tipo],
@@ -73,9 +76,11 @@ export class AuthService {
 
   //realizar login gerando token de acesso
   async login(user: LoginUserDto) {
+    const hashedCpf = await bcrypt.hash(user.cpf, 10);
+
     //verificar se cpf exite:
     const verifyUser = await this.prisma.fiscal.findUnique({
-      where: { cpf: user.cpf },
+      where: { cpf: hashedCpf},
     });
 
     if (!verifyUser) throw new NotFoundException('Usuário nao encontrado');
