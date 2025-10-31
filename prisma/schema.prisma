@@ -68,13 +68,14 @@ model relatoriodiario {
   outras_atividades                String
   cordenadas                       String
   placa_vtr                        String?
-  km_inicio                        Int?
-  km_final                         Int?
+  km_inicio                        String?
+  km_final                         String?
   condicoes_vtr                    String?
   tipo_acao                        TipoAcao
   descricao_veiculos               String?
-  km_percorrido                    Int
-  horas                            Int
+  km_percorrido                    String
+  horas_percorridas                String
+  createdAt                        DateTime             @default(now())
   processado                       Boolean              @default(false)
   fiscalId                         Int
   tipo_veiculo_abordado            TipoVeiculoAbordado?
