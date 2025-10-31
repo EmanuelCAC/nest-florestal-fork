@@ -4,7 +4,9 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { AutoInfracaoModule } from './autoInfracao/autoInfracao.module';
+import { RelatoriodiarioModule } from './relatoriodiario/relatoriodiario.module';
 import { ConfigModule } from '@nestjs/config';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -13,7 +15,9 @@ import { ConfigModule } from '@nestjs/config';
     PrismaModule,
     AuthModule,
     AutoInfracaoModule,
+    RelatoriodiarioModule
   ],
+
   controllers: [],
   providers: [
     {
