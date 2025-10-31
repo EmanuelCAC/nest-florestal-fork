@@ -26,10 +26,10 @@ model autoinfracao {
 model exemplocaso {
   id              Int            @id @default(autoincrement())
   nome_resumo     String?        @db.VarChar(100)
-  nome_completo   String         @db.VarChar(255)
+  nome_completo   String         @db.text
   palavra_chave   String?        @db.VarChar(255)
   categoria       String         @db.VarChar(100)
-  tipo_ocorrencia String?        @db.VarChar(100)
+  tipo_ocorrencia String?        @db.text
   tags            String?        @db.VarChar(255)
   proc_op         String
   proc_adm        String
