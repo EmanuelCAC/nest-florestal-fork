@@ -6,7 +6,7 @@ export class CreateAutoInfracaoDto {
     data_emissao: string;
 
     @IsString()
-    cpf: string;
+    cpf?: string;
 
     @IsNumber()
     id_exemplocaso: number;
