@@ -95,16 +95,16 @@ export class CreateRelatorioDto {
     outras_atividades: string;
 
     @IsString()
-    cordenadas: string;
+    coordenadas: string;
 
     @IsString()
     placa_vtr?: string;
 
-    @IsNumber()
-    km_inicio?: number;
+    @IsString()
+    km_inicio?: string;
 
-    @IsNumber()
-    km_final?: number;
+    @IsString()
+    km_final?: string;
 
     @IsString()
     condicoes_vtr?: string;
@@ -121,8 +121,11 @@ export class CreateRelatorioDto {
     @IsString()
     descricao_veiculos?: string;
 
-    @IsNumber()
-    km_percorrido: number;
+    @IsString()
+    km_percorrido: string;
+
+    @IsString()
+    horas_percorridas: string;
 
     @IsOptional()
     autoinfracao?: CreateAutoInfracaoDto[];
