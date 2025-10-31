@@ -39,7 +39,7 @@ export class AutoInfracaoService {
     await this.prisma.autoinfracao.createMany({
       data: autoinfracao.map((autoinfracao) => ({
         ...autoinfracao,
-        cpf: fiscal.cpf
+        cpf: fiscal.cpf,
         relatoriodiarioId: relatorio.id,
       })),
     });
