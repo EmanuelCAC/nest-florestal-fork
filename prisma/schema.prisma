@@ -66,7 +66,7 @@ model relatoriodiario {
   especificacao_local              String
   relatorio                        String
   outras_atividades                String
-  cordenadas                       String
+  coordenadas                      String
   placa_vtr                        String?
   km_inicio                        String?
   km_final                         String?
