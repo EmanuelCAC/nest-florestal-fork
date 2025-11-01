@@ -61,7 +61,7 @@ export class AutoInfracaoService {
     await this.prisma.autoinfracao.createMany({
       data: autoinfracao.map((auto) => ({
         ...auto,
-        data_emissao: this.convertToISO8601(auto.data_emissao),
+        data_emissao: this.convertToISO8601(auto.data),
         cpf: fiscal.cpf,
         relatoriodiarioId: relatorio.id,
       })),
