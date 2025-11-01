@@ -11,6 +11,22 @@ export class AutoInfracaoService {
     return exemploDeCasos;
   }
 
+  private convertToISO8601(dateString: string): Date {
+    // Formato esperado: "31/10/2025 20:51"
+    dateString = dateString.replace(',', '');
+    const [datePart, timePart] = dateString.split(' ');
+    const [day, month, year] = datePart.split('/');
+    const [hour, minute] = timePart.split(':');
+    
+    return new Date(
+      parseInt(year),
+      parseInt(month) - 1, // mês é zero-indexado
+      parseInt(day),
+      parseInt(hour),
+      parseInt(minute)
+    );
+  }
+
   async createRelatorio(body: CreateRelatorioDto, requisicao: any) {
     console.log('requisicao:', requisicao);
 
@@ -25,20 +41,25 @@ export class AutoInfracaoService {
     }
 
     // remover autoinfracao do body
-    const { autoinfracao, ...rest } = body; 
+    const { autoinfracao, data_hora_inicio_acao, data_hora_termino_acao, ...rest } = body;
+    const dataHoraInicioISO = this.convertToISO8601(data_hora_inicio_acao);
+    const dataHoraTerminoISO = this.convertToISO8601(data_hora_termino_acao);
 
     // criar relatorio
     const relatorio = await this.prisma.relatoriodiario.create({
       data: {
         ...rest,
+        data_hora_inicio_acao: dataHoraInicioISO,
+        data_hora_termino_acao: dataHoraTerminoISO,
         fiscalId: fiscal.id,
       },
     });
 
    if (autoinfracao) {
     await this.prisma.autoinfracao.createMany({
-      data: autoinfracao.map((autoinfracao) => ({
-        ...autoinfracao,
+      data: autoinfracao.map((auto) => ({
+        ...auto,
+        data_emissao: this.convertToISO8601(auto.data_emissao),
         cpf: fiscal.cpf,
         relatoriodiarioId: relatorio.id,
       })),

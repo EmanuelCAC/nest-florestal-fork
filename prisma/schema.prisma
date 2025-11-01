@@ -9,7 +9,7 @@ datasource db {
 
 model autoinfracao {
   id                Int              @id @default(autoincrement())
-  data_emissao      DateTime         @db.Timestamp(6)
+  data_emissao      DateTime         
   cpf               String           @db.VarChar(11)
   id_exemplocaso    Int
   descricao         String
