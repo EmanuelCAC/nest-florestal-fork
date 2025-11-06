@@ -57,18 +57,19 @@ export class AutoInfracaoService {
       },
     });
 
-   if (autoinfracao) {
-    await this.prisma.autoinfracao.createMany({
-      data: autoinfracao.map((auto) => ({
-        ...auto,
-        data_emissao: this.convertToISO8601(auto.data),
-        cpf: fiscal.cpf,
-        relatoriodiarioId: relatorio.id,
-      })),
-    });
-   }
+    if (autoinfracao) {
+      await this.prisma.autoinfracao.createMany({
+        data: autoinfracao.map((auto) => ({
+          id_exemplocaso: auto.id_exemplocaso,
+          descricao: auto.descricao,
+          data_emissao: this.convertToISO8601(auto.data),
+          cpf: fiscal.cpf,
+          relatoriodiarioId: relatorio.id,
+        })),
+      });
+    }
 
-   return relatorio;
+    return relatorio;
    
   }
 }

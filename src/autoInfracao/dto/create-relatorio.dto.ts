@@ -1,6 +1,5 @@
 import { IsBoolean, IsEnum, isEnum, isIn, IsNumber, IsOptional, IsString, isString } from "class-validator";
 import { CreateAutoInfracaoDto } from "./create-autoinfracao.dto";
-import e from "express";
 
 export enum tipo_acao {
   incursao_viatura = 'incursao_viatura',
