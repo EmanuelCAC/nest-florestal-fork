@@ -15,7 +15,6 @@ export class AutoInfracaoController {
 
 
   @Post('relatorio')
-  @UseGuards(JwtAuthGuard)
   createRelatorio(@Body() body: CreateRelatorioDto, @Request() req: any) {
     return this.autoInfracaoService.createRelatorio(body, req.user);
   }

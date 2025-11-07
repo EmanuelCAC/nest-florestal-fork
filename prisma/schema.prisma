@@ -9,10 +9,10 @@ datasource db {
 
 model autoinfracao {
   id                Int              @id @default(autoincrement())
-  data_emissao      DateTime         @db.Timestamp(6)
+  data_emissao      DateTime
   cpf               String           @db.VarChar(11)
   id_exemplocaso    Int
-  descricao         String
+  descricao         String           @db.Text
   relatoriodiarioId Int?
   fiscal            fiscal           @relation(fields: [cpf], references: [cpf], onDelete: Cascade)
   exemplocaso       exemplocaso      @relation(fields: [id_exemplocaso], references: [id], onDelete: Cascade)
@@ -25,16 +25,16 @@ model autoinfracao {
 
 model exemplocaso {
   id              Int            @id @default(autoincrement())
-  nome_resumo     String?        @db.VarChar(100)
-  nome_completo   String         @db.VarChar(255)
-  palavra_chave   String?        @db.VarChar(255)
-  categoria       String         @db.VarChar(100)
-  tipo_ocorrencia String?        @db.VarChar(100)
-  tags            String?        @db.VarChar(255)
-  proc_op         String
-  proc_adm        String
-  enq_pen         String
-  enq_adm         String
+  nome_resumo     String?        @db.Text
+  nome_completo   String         @db.Text
+  palavra_chave   String?        @db.Text
+  categoria       String         @db.Text
+  tipo_ocorrencia String?        @db.Text
+  tags            String?        @db.Text
+  proc_op         String         @db.Text
+  proc_adm        String         @db.Text
+  enq_pen         String         @db.Text
+  enq_adm         String         @db.Text
   modelo          String         @db.Text
   campos          String?        @db.Text
   autoinfracao    autoinfracao[]
@@ -66,15 +66,16 @@ model relatoriodiario {
   especificacao_local              String
   relatorio                        String
   outras_atividades                String
-  cordenadas                       String
+  coordenadas                      String
   placa_vtr                        String?
-  km_inicio                        Int?
-  km_final                         Int?
+  km_inicio                        String?
+  km_final                         String?
   condicoes_vtr                    String?
   tipo_acao                        TipoAcao
   descricao_veiculos               String?
-  km_percorrido                    Int
-  horas                            Int
+  km_percorrido                    String
+  horas_percorridas                String
+  createdAt                        DateTime             @default(now())
   processado                       Boolean              @default(false)
   fiscalId                         Int
   tipo_veiculo_abordado            TipoVeiculoAbordado?

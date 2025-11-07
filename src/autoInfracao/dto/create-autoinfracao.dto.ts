@@ -3,10 +3,10 @@ import { IsNumber, IsString } from "class-validator";
 export class CreateAutoInfracaoDto {
 
     @IsString()
-    data_emissao: string;
+    data: string;
 
     @IsString()
-    cpf: string;
+    cpf?: string;
 
     @IsNumber()
     id_exemplocaso: number;
