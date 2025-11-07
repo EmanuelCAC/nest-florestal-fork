@@ -28,14 +28,14 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @UseGuards(AdminGuard)
-  @Post('signup')
   @IsPublic()
-signup(@Body() user: CreateUserDto) {
-  return this.authService.signup({
-    ...user,
-    tipo: tipo_usuario[user.tipo as keyof typeof tipo_usuario],
-  });
-}
+  @Post('signup')
+  signup(@Body() user: CreateUserDto) {
+    return this.authService.signup({
+      ...user,
+      tipo: tipo_usuario[user.tipo as keyof typeof tipo_usuario],
+    });
+  }
 
   @Post('signin')
   @IsPublic()

@@ -1,6 +1,5 @@
 import { IsBoolean, IsEnum, isEnum, isIn, IsNumber, IsOptional, IsString, isString } from "class-validator";
 import { CreateAutoInfracaoDto } from "./create-autoinfracao.dto";
-import e from "express";
 
 export enum tipo_acao {
   incursao_viatura = 'incursao_viatura',
@@ -95,16 +94,16 @@ export class CreateRelatorioDto {
     outras_atividades: string;
 
     @IsString()
-    cordenadas: string;
+    coordenadas: string;
 
     @IsString()
     placa_vtr?: string;
 
-    @IsNumber()
-    km_inicio?: number;
+    @IsString()
+    km_inicio?: string;
 
-    @IsNumber()
-    km_final?: number;
+    @IsString()
+    km_final?: string;
 
     @IsString()
     condicoes_vtr?: string;
@@ -121,8 +120,11 @@ export class CreateRelatorioDto {
     @IsString()
     descricao_veiculos?: string;
 
-    @IsNumber()
-    km_percorrido: number;
+    @IsString()
+    km_percorrido: string;
+
+    @IsString()
+    horas_percorridas: string;
 
     @IsOptional()
     autoinfracao?: CreateAutoInfracaoDto[];
