@@ -30,7 +30,6 @@ export class AuthController {
   @UseGuards(AdminGuard)
   @Post('signup')
   @IsPublic()
- @Post('signup')
 signup(@Body() user: CreateUserDto) {
   return this.authService.signup({
     ...user,
