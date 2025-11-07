@@ -10,14 +10,12 @@ export class AutoInfracaoController {
 
   @Get('exemploCaso')
   getExemploCaso() {
-    console.log("Teste Exemplo Caso")
     return this.autoInfracaoService.getExemplosDeCasos();
   }
 
 
   @Post('relatorio')
   createRelatorio(@Body() body: CreateRelatorioDto, @Request() req: any) {
-    console.log("Teste Relatorio")
     return this.autoInfracaoService.createRelatorio(body, req.user);
   }
 }

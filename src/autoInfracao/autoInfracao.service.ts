@@ -13,7 +13,6 @@ export class AutoInfracaoService {
 
   private convertToISO8601(dateString: string): Date {
     // Formato esperado: "31/10/2025 20:51"
-    console.log(dateString)
     dateString = dateString.replace(',', '');
     const [datePart, timePart] = dateString.split(' ');
     const [day, month, year] = datePart.split('/');
@@ -29,8 +28,6 @@ export class AutoInfracaoService {
   }
 
   async createRelatorio(body: CreateRelatorioDto, requisicao: any) {
-    console.log('requisicao:', requisicao);
-
     //verificar se fiscal autenticado
     const fiscal = await this.prisma.fiscal.findUnique({
       where: { cpf: requisicao.cpf },
@@ -43,7 +40,6 @@ export class AutoInfracaoService {
 
     // remover autoinfracao do body
     const { autoinfracao, data_hora_inicio_acao, data_hora_termino_acao, ...rest } = body;
-    console.log(data_hora_inicio_acao, data_hora_termino_acao)
     const dataHoraInicioISO = this.convertToISO8601(data_hora_inicio_acao);
     const dataHoraTerminoISO = this.convertToISO8601(data_hora_termino_acao);
 
@@ -69,8 +65,7 @@ export class AutoInfracaoService {
       });
     }
 
-    return relatorio;
-   
+    return {status: 'success', message: 'Relatório criado com sucesso'};
   }
 }
 
