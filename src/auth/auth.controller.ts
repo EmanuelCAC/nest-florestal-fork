@@ -31,11 +31,11 @@ export class AuthController {
   @IsPublic()
   @Post('signup')
   signup(@Body() user: CreateUserDto) {
-  return this.authService.signup({
-    ...user,
-    tipo: tipo_usuario[user.tipo as keyof typeof tipo_usuario],
-  });
-}
+    return this.authService.signup({
+      ...user,
+      tipo: tipo_usuario[user.tipo as keyof typeof tipo_usuario],
+    });
+  }
 
   @Post('signin')
   @IsPublic()
