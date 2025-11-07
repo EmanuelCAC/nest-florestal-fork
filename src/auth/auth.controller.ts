@@ -21,16 +21,20 @@ import { DeleteRequest } from './models/deleteRequest';
 import { AdminGuard } from './guards/admin.guard';
 import { LoginUserDto } from 'src/user/dto/login-user.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import { tipo_usuario } from 'src/user/entities/user.entity';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @UseGuards(AdminGuard)
+  @IsPublic()
   @Post('signup')
-  @IsAdmin()
   signup(@Body() user: CreateUserDto) {
-    return this.authService.signup(user);
+    return this.authService.signup({
+      ...user,
+      tipo: tipo_usuario[user.tipo as keyof typeof tipo_usuario],
+    });
   }
 
   @Post('signin')
