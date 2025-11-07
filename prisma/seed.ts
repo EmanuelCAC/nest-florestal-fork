@@ -1,28 +1,26 @@
-// prisma/seed.ts
-
 import { PrismaClient } from '@prisma/client';
+import { cpfToHmac } from 'src/util/crypto.util';
 
-// Inicializa o Prisma Client
 const prisma = new PrismaClient();
 
 async function main() {
   console.log('Iniciando o processo de seeding...');
 
-  // --- 1. Limpar dados antigos (opcional, mas recomendado para consistência) ---
-  // A ordem é importante para evitar erros de chave estrangeira
+  const cpfAdminOriginal = '111.111.111-11';
+  const cpfFiscalOriginal = '222.222.222-22';
+
   await prisma.autoinfracao.deleteMany({});
   await prisma.relatoriodiario.deleteMany({});
   await prisma.fiscal.deleteMany({});
   await prisma.exemplocaso.deleteMany({});
   console.log('Banco de dados limpo.');
 
-  // --- 2. Criar Fiscais ---
   const admin = await prisma.fiscal.create({
     data: {
-      id: 1, // ID fixo para facilitar
-      cpf: '111.111.111-11',
+      id: 1,
+      cpf: cpfToHmac(cpfAdminOriginal),
       nome: 'Admin Chefe',
-      senha: 'admin', // Lembre-se que em um projeto real, a senha deve ser criptografada!
+      senha: 'admin',
       tipo: 'administrador',
     },
   });
@@ -30,7 +28,7 @@ async function main() {
   const fiscalComum = await prisma.fiscal.create({
     data: {
       id: 2,
-      cpf: '222.222.222-22',
+      cpf: cpfToHmac(cpfFiscalOriginal),
       nome: 'Fiscal de Campo',
       senha: 'fiscal',
       tipo: 'fiscal',
@@ -38,7 +36,6 @@ async function main() {
   });
   console.log('Fiscais criados:', { admin, fiscalComum });
 
-  // --- 3. Criar um Exemplo de Caso (necessário para o Auto de Infração) ---
   const exemplo = await prisma.exemplocaso.create({
     data: {
       nome_completo: 'Construção Irregular em Área de Preservação',
@@ -52,8 +49,6 @@ async function main() {
   });
   console.log('Exemplo de caso criado:', exemplo);
 
-  // --- 4. Criar Relatórios ---
-  // Relatório que JÁ FOI processado (deve ser ignorado pela nossa rota)
   const relatorioProcessado = await prisma.relatoriodiario.create({
     data: {
       equipe: 'delta_sede_diurno',
@@ -74,19 +69,20 @@ async function main() {
       km_percorrido: 120,
       horas: 8,
       tipo_acao: 'fiscalizacao_embarcada',
-      processado: true, // ESTE ESTÁ PROCESSADO
+      tipo_veiculo_aborado: 'carro',
+      descricao_veiculos: 'N/A',
+      processado: true,
       fiscalId: fiscalComum.id,
     },
   });
 
-  // Relatório que NÃO FOI processado (o alvo do nosso teste)
   const relatorioNaoProcessado = await prisma.relatoriodiario.create({
     data: {
       equipe: 'charlie_rp_diurno',
       equipe_em_atuacao: 'Fiscal C, Fiscal D',
       orgaos_e_instituicoes_envolvadas: 'N/A',
       responsavel: fiscalComum.nome,
-      data_hora_inicio_acao: new Date(), // Data e hora atuais
+      data_hora_inicio_acao: new Date(),
       data_hora_termino_acao: new Date(),
       origem: 'rotina',
       registro_ocorrencia: true,
@@ -99,9 +95,11 @@ async function main() {
       cordenadas: '[-23.383, -45.671]',
       km_percorrido: 85,
       horas: 9,
-      processado: false, // <-- ESTE É O QUE QUEREMOS ENCONTRAR
+      tipo_acao: 'incursao_viatura',
+      tipo_veiculo_aborado: 'moto',
+      descricao_veiculos: 'Veículo sem placa aparente.',
+      processado: false,
       fiscalId: fiscalComum.id,
-      tipo_acao: 'fiscalizacao_embarcada', // Adicionando o campo obrigatório
     },
   });
   console.log('Relatórios criados:', {
@@ -109,17 +107,15 @@ async function main() {
     relatorioNaoProcessado,
   });
 
-  // --- 5. Criar Autos de Infração e vincular ao relatório NÃO PROCESSADO ---
   const auto1 = await prisma.autoinfracao.create({
     data: {
       data_emissao: new Date(),
       lat: -23.385,
       lon: -45.673,
       descricao: 'Desmatamento de 0.5 hectare de vegetação nativa.',
-      // Vínculos
-      fiscal: { connect: { cpf: fiscalComum.cpf } },
+      fiscal: { connect: { cpf: cpfToHmac(cpfFiscalOriginal) } },
       exemplocaso: { connect: { id: exemplo.id } },
-      relatoriodiario: { connect: { id: relatorioNaoProcessado.id } }, // <-- Conexão importante
+      relatoriodiario: { connect: { id: relatorioNaoProcessado.id } },
     },
   });
 
@@ -129,10 +125,9 @@ async function main() {
       lat: -23.387,
       lon: -45.675,
       descricao: 'Construção de barraco em área de proteção permanente.',
-      // Vínculos
-      fiscal: { connect: { cpf: fiscalComum.cpf } },
+      fiscal: { connect: { cpf: cpfToHmac(cpfFiscalOriginal) } },
       exemplocaso: { connect: { id: exemplo.id } },
-      relatoriodiario: { connect: { id: relatorioNaoProcessado.id } }, // <-- Conexão importante
+      relatoriodiario: { connect: { id: relatorioNaoProcessado.id } },
     },
   });
   console.log('Autos de Infração criados e vinculados:', { auto1, auto2 });
