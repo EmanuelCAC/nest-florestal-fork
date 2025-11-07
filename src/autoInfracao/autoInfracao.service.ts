@@ -13,18 +13,35 @@ export class AutoInfracaoService {
 
   private convertToISO8601(dateString: string): Date {
     // Formato esperado: "31/10/2025 20:51"
-    dateString = dateString.replace(',', '');
-    const [datePart, timePart] = dateString.split(' ');
-    const [day, month, year] = datePart.split('/');
-    const [hour, minute] = timePart.split(':');
-    
-    return new Date(
-      parseInt(year),
-      parseInt(month) - 1, // mês é zero-indexado
-      parseInt(day),
-      parseInt(hour),
-      parseInt(minute)
-    );
+    if (!dateString || typeof dateString !== 'string') {
+      throw new Error('Invalid date string');
+    }
+    dateString = dateString.replace(',', '').trim();
+    const parts = dateString.split(' ');
+    if (parts.length !== 2) {
+      throw new Error('Date must be in format DD/MM/YYYY HH:MM');
+    }
+    const [datePart, timePart] = parts;
+    const dateParts = datePart.split('/');
+    const timeParts = timePart.split(':');
+    if (dateParts.length !== 3 || timeParts.length !== 2) {
+      throw new Error('Invalid date format');
+    }
+    const [day, month, year] = dateParts.map(p => parseInt(p, 10));
+    const [hour, minute] = timeParts.map(p => parseInt(p, 10));
+    if ([day, month, year, hour, minute].some(isNaN)) {
+      throw new Error('Date contains non-numeric values');
+    }
+    // Optionally, check for valid ranges (day: 1-31, month: 1-12, hour: 0-23, minute: 0-59)
+    if (
+      day < 1 || day > 31 ||
+      month < 1 || month > 12 ||
+      hour < 0 || hour > 23 ||
+      minute < 0 || minute > 59
+    ) {
+      throw new Error('Date contains out-of-range values');
+    }
+    return new Date(year, month - 1, day, hour, minute);
   }
 
   async createRelatorio(body: CreateRelatorioDto, requisicao: any) {
