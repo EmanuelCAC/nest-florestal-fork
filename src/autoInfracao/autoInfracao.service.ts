@@ -82,7 +82,7 @@ export class AutoInfracaoService {
       });
     }
 
-    return {status: 'success', message: 'Relatório criado com sucesso'};
+    return { status: 'success', message: 'Relatório criado com sucesso' };
   }
 }
 
