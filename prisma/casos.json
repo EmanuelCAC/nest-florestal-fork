@@ -1,0 +1,2235 @@
+{
+    "": [
+        {
+            "infractionType": " ",
+            "infractionLaw": " ",
+            "components" : [
+                {
+                    "name": "local",
+                    "local": [
+                        {
+                            "type": "",
+                            "name": ""
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "hor    io",
+                    "horario": [
+                        {
+                            "type": "",
+                            "name": ""
+                        }
+                    ]
+                },
+
+                {
+                    "name": "informacoesExtras",
+                    "informacoesExtras": [
+                        {
+                            "type": "",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "Reformas1": [
+        {
+            "infractionType": "Reforma sem autorização",
+            "infractionLaw": "Art. 67.da Resolução SIMA N° 05/2021 Realizar quaisquer atividades ou adotar conduta em desacordo com os objetivos da unidade de conservação, o seu plano de manejo e regulamentos: Multa de R$ 500,00 (quinhentos reais), majorada até R$ 10.000,00 (dez mil reais), mediante laudo técnico do órgão gestor da unidade de conservação.",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type" : "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Primeira estrutura",
+                            "id": 6
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude da primeira estrutura",
+                            "id": 7
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude da primeira estrutura",
+                            "id": 8
+                        },
+                        {
+                            "type": "string",
+                            "name": "Segunda estrutura",
+                            "id": 9
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude da segunda estrutura",
+                            "id": 10
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude da segunda estrutura",
+                            "id": 11
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude da unidade de conservação",
+                            "id": 13
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude da unidade de conservação",
+                            "id": 14
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario" : 
+                        {
+                            "type": "date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+
+                },
+
+                {
+                    "name": "Informações Extras",
+                    "Informacoes Extras": [
+                        {
+                            "type": "string",
+                            "name": "Descrição da intervenção",
+                            "id": 12
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 5
+                        }
+                    ]
+
+                }
+            ]
+        }
+    ],
+
+    "Reformas2": [
+        {
+            "infractionType": "Reforma sem autorização",
+            "infractionLaw": "Art. 67.da Resolução SIMA N° 05/2021 Realizar quaisquer atividades ou adotar conduta em desacordo com os objetivos da unidade de conservação, o seu plano de manejo e regulamentos: Multa de R$ 500,00 (quinhentos reais), majorada até R$ 10.000,00 (dez mil reais), mediante laudo técnico do órgão gestor da unidade de conservação.",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type" : "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Primeira estrutura",
+                            "id": 5
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude da primeira estrutura",
+                            "id": 6
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude da primeira estrutura",
+                            "id": 7
+                        },
+                        {
+                            "type": "string",
+                            "name": "Segunda estrutura",
+                            "id": 8
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude da segunda estrutura",
+                            "id": 9
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude da segunda estrutura",
+                            "id": 10
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude da unidade de conservação",
+                            "id": 12
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude da unidade de conservação",
+                            "id": 13
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario" : 
+                        {
+                            "type": "date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+
+                },
+
+                {
+                    "name": "Informações Extras",
+                    "Informacoes Extras": [
+                        {
+                            "type": "string",
+                            "name": "Descrição da intervenção",
+                            "id": 11
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados do Último Ocupante",
+                    "Dados do Último Ocupante": [
+                        {
+                            "type": "string",
+                            "name": "Nome do ocupante",
+                            "id": 14
+                        },
+                        {
+                            "type": "string",
+                            "name": "CPF",
+                            "id": 15
+                        },
+                        {
+                            "type": "string",
+                            "name": "RG",
+                            "id": 16
+                        }
+                    ]
+
+                }
+            ]
+        }
+    ],
+
+    "MatarAnimal": [
+        {
+            "infractionType": "Matar Animal",
+            "infractionLaw": "Art. 25 da Resolução SIMA 05/2021 MATAR, PERSEGUIR, CAÇAR, APANHAR, COLETAR OU UTILIZAR ESPÉCIMES DA FAUNA SILVESTRE, NATIVOS OU EM ROTA MIGRATÓRIA, SEM A DEVIDA PERMISSÃO, LICENÇA OU AUTORIZAÇÃO DA AUTORIDADE COMPETENTE, OU EM DESACORDO COM A OBTIDA",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 8
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 9
+                        },
+                        {
+                            "type": "string",
+                            "name": "Distrito policial",
+                            "id": 10
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario": [
+                        {
+                            "type": "Date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 6
+                        },
+                        {
+                            "type": "string",
+                            "name": "Instrumento utilizado pelo infrator",
+                            "id": 7
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Animal",
+                    "Animal": [
+                        {
+                            "type": "string",
+                            "name": "Espécie do animal",
+                            "id": 5
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "PerseguirAnimal": [
+        {
+            "infractionType": "Perseguir Animal",
+            "infractionLaw": "Art. 25 da Resolução SIMA 05/2021 MATAR, PERSEGUIR, CAÇAR, APANHAR, COLETAR OU UTILIZAR ESPÉCIMES DA FAUNA SILVESTRE, NATIVOS OU EM ROTA MIGRATÓRIA, SEM A DEVIDA PERMISSÃO, LICENÇA OU AUTORIZAÇÃO DA AUTORIDADE COMPETENTE, OU EM DESACORDO COM A OBTIDA",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 8
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 9
+                        },
+                        {
+                            "type": "string",
+                            "name": "Distrito policial",
+                            "id": 10
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario": [
+                        {
+                            "type": "Date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 6
+                        },
+                        {
+                            "type": "string",
+                            "name": "Instrumento utilizado pelo infrator",
+                            "id": 7
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Animal",
+                    "Animal": [
+                        {
+                            "type": "string",
+                            "name": "Espécie do animal",
+                            "id": 5
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "CapturarAnimal": [
+        {
+            "infractionType": "Capturar Animal",
+            "infractionLaw": "Art. 25 da Resolução SIMA 05/2021 MATAR, PERSEGUIR, CAÇAR, APANHAR, COLETAR OU UTILIZAR ESPÉCIMES DA FAUNA SILVESTRE, NATIVOS OU EM ROTA MIGRATÓRIA, SEM A DEVIDA PERMISSÃO, LICENÇA OU AUTORIZAÇÃO DA AUTORIDADE COMPETENTE, OU EM DESACORDO COM A OBTIDA",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 8
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 9
+                        },
+                        {
+                            "type": "string",
+                            "name": "Distrito policial",
+                            "id": 10
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario": [
+                        {
+                            "type": "Date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 6
+                        },
+                        {
+                            "type": "string",
+                            "name": "Instrumento utilizado pelo infrator",
+                            "id": 7
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Animal",
+                    "Animal": [
+                        {
+                            "type": "string",
+                            "name": "Espécie do animal",
+                            "id": 5
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "AnimalAbatido": [
+        {
+            "infractionType": "Animal Abatido",
+            "infractionLaw": "Art. 25 da Resolução SIMA 05/2021 MATAR, PERSEGUIR, CAÇAR, APANHAR, COLETAR OU UTILIZAR ESPÉCIMES DA FAUNA SILVESTRE, NATIVOS OU EM ROTA MIGRATÓRIA, SEM A DEVIDA PERMISSÃO, LICENÇA OU AUTORIZAÇÃO DA AUTORIDADE COMPETENTE, OU EM DESACORDO COM A OBTIDA",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 6
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 7
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario": [
+                        {
+                            "type": "Date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Animal",
+                    "Animal": [
+                        {
+                            "type": "string",
+                            "name": "Espécie do animal",
+                            "id": 5
+                        },
+                        {
+                            "type": "string",
+                            "name": "Provável causa da morte do animal",
+                            "id": 8
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "Aves": [
+        {
+            "infractionType": "Engaiolar Aves",
+            "infractionLaw": "Art. 25 da Resolução SIMA 05/2021 § 3°, Item III VENDER, EXPÔR À VENDA, EXPORTAR OU ADQUIRIR, GUARDAR, TER EM CATIVEIRO OU DEPÓSITO, UTILIZAR OU TRANSPORTAR OVOS, LARVAS OU ESPÉCIMES DA FAUNA SILVESTRE, NATIVA OU EM ROTA MIGRATÓRIA, BEM COMO PRODUTOS E OBJETOS DELA ORIUNDOS, PROVENIENTES DE CRIADOUROS NÃO AUTORIZADOS, SEM A DEVIDA PERMISSÃO, LICENÇA OU AUTORIZAÇÃO DA AUTORIDADE AMBIENTAL COMPETENTE OU EM DESACORDO COM A OBTIDA",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Infrator qualificado por",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "OvosEmCativeiro": [
+        {
+            "infractionType": "Ovos ou Larvas em cativeiro",
+            "infractionLaw": "Art. 25 § 3ºda Resolução SMA 48/2014 VENDER, EXPÔR À VENDA, EXPORTAR OU ADQUIRIR, GUARDAR, TER EM CATIVEIRO OU DEPÓSITO, UTILIZAR OU TRANSPORTAR OVOS, LARVAS OU ESPÉCIMES DA FAUNA SILVESTRE, NATIVA OU EM ROTA MIGRATÓRIA, BEM COMO PRODUTOS E OBJETOS DELA ORIUNDOS, PROVENIENTES DE CRIADOUROS NÃO AUTORIZADOS, SEM A DEVIDA PERMISSÃO, LICENÇA OU AUTORIZAÇÃO DA AUTORIDADE AMBIENTAL COMPETENTE OU EM DESACORDO COM A OBTIDA",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Infrator qualificado por",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "OvosOuLarvasTransportadas": [
+        {
+            "infractionType": "Ovos ou Larvas transportadas",
+            "infractionLaw": "Art. 25 § 3ºda Resolução SMA 48/2014 VENDER, EXPÔR À VENDA, EXPORTAR OU ADQUIRIR, GUARDAR, TER EM CATIVEIRO OU DEPÓSITO, UTILIZAR OU TRANSPORTAR OVOS, LARVAS OU ESPÉCIMES DA FAUNA SILVESTRE, NATIVA OU EM ROTA MIGRATÓRIA, BEM COMO PRODUTOS E OBJETOS DELA ORIUNDOS, PROVENIENTES DE CRIADOUROS NÃO AUTORIZADOS, SEM A DEVIDA PERMISSÃO, LICENÇA OU AUTORIZAÇÃO DA AUTORIDADE AMBIENTAL COMPETENTE OU EM DESACORDO COM A OBTIDA",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Infrator qualificado por",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "RanchoSemInfrator": [
+        {
+            "infractionType": "Rancho",
+            "infractionLaw": "",
+             "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                }
+            ]
+        }
+    ],
+
+    "RanchoComInfrator": [
+        {
+            "infractionType": "Rancho",
+            "infractionLaw": "",
+             "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "EstaleiroComInfrator": [
+        {
+            "infractionType": "Estaleiro",
+            "infractionLaw": "",
+             "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "EstaleiroSemInfrator": [
+        {
+            "infractionType": "Estaleiro",
+            "infractionLaw": "",
+             "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                }
+            ]
+        }
+    ],
+
+    "EstaleiroComSevaSemInfrator": [
+        {
+            "infractionType": "Estaleiro",
+            "infractionLaw": "",
+             "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                }
+            ]
+        }
+    ],
+
+    "RetirarNinho": [
+        {
+            "infractionType": "Ninho Retirar",
+            "infractionLaw": "Art. 25 § 3º da Resolução SMA 48/2014 MODIFICAR, DANIFICAR OU DESTRUIR NINHO, ABRIGO OU CRIADOURO NATURAL",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Infrator qualificado por",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "DestruirNinho": [
+        {
+            "infractionType": "Ninho Destruir",
+            "infractionLaw": "Art. 25 § 3º da Resolução SMA 48/2014 MODIFICAR, DANIFICAR OU DESTRUIR NINHO, ABRIGO OU CRIADOURO NATURAL",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Ninho danificado",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "ReintroduzirAnimal" : [
+        {
+            "infractionType": "Reintroduzir Animal",
+            "infractionLaw": "Art. 26  §2º da Resolução SMA 48/2014 REINTRODUZIR NA NATUREZA ESPÉCIME DA FAUNA SILVESTRE SEM PARECER TÉCNICO OFICIAL FAVORÁVEL E LICENÇA EXPEDIDA PELA AUTORIDADE AMBIENTAL COMPETENTE, QUANDO EXIGÍVEL",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Animal",
+                    "Animal": [
+                        {
+                            "type": "string",
+                            "name": "Espécie do animal",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "CaçaProfissionalAnimalMorto" : [
+        {
+            "infractionType": "Caça Profissional",
+            "infractionLaw": "Art. 28 da Resolução SMA 48/2014 PRATICAR CAÇA PROFISSIONAL NO TERRITÓRIO DO ESTADO DE SÃO PAULO",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Ato comitido pelo infrator",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "CaçaProfissionalAnimalVivo" : [
+        {
+            "infractionType": "Caça Profissional",
+            "infractionLaw": "Art. 28 da Resolução SMA 48/2014 PRATICAR CAÇA PROFISSIONAL NO TERRITÓRIO DO ESTADO DE SÃO PAULO",
+            "components" : [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Ato comitido pelo infrator",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "MausTratos": [
+        {
+            "infractionType": "Maus Tratos:",
+            "infractionLaw": "PRATICAR ATO DE ABUSO, MAUS TRATOS, FERIR OU MUTILAR ANIMAIS SILVESTRES,DOMÉSTICOS OU DOMESTICADOS, NATIVOS OU EXÓTICOS, OU REALIZAR EXPERIÊNCIA DOLOROSA OU CRUEL EM ANIMAL VIVO, AINDA QUE PARA FINS DIDÁTICOS OU CIENTÍFICOS,QUANDO EXISTIREM RECURSOS ALTERNATIVOS, OU AINDA, REALIZAR, PROMOVER OU PARTICIPAR, MESMO COMO EXPECTADOR, DE LUTAS ENTRE ANIMAIS DA MESMA ESPÉCIE OU DE ESPÉCIE DIFERENTE.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Ato comitido pelo infrator",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "Pesca": [
+        {
+            "infractionType": "Pesca",
+            "infractionLaw": "PESCAR EM PERÍODO OU LOCAL NO QUAL A PESCA SEJA PROIBIDA",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Ferramenta utilizada pelo infrator",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "EspecieExoticaFauna": [
+        {
+            "infractionType": "Espécies exóticas da fauna",
+            "infractionLaw": "INTRODUZIR EM UNIDADE DE CONSERVAÇÃO ESPÉCIES ALÓCTONES (FAUNA OU FLORA EXÓTICAS)",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Espécie introduzida pelo infrator",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "ConstrucaoOuAmpliacaoComOcupante": [
+        {
+            "infractionType": "Construção e/ou ampliação com presença do ocupante/proprietário/posseiro/funcionário com impedimento de regeneração de vegetação",
+            "infractionLaw": "Art. 48.da Resolução SIMA N° 05/2021 Impedir ou dificultar a regeneração natural de florestas ou demais formas de vegetação nativa em unidades de conservação ou outras áreas especialmente protegidas, quando couber, área de preservação permanente, reserva legal ou demais locais cuja regeneração tenha sido indicada pela autoridade ambiental competente. Multa de R$ 5.000,00 (cinco mil reais), por hectare ou fração. Parágrafo único - O disposto no caput não se aplica para o uso permitido das áreas de preservação permanente.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 11
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 12
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario" : 
+                        {
+                            "type": "date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator qualificado",
+                            "id": 5
+                        },
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator flagrado executando a construção",
+                            "id": 6
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Informação da estrutura",
+                    "Informação da estrutura": [
+                        {
+                            "type": "string",
+                            "name": "Tipo da estrutura",
+                            "id": 7
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Latitude da estrutura",
+                            "id": 8
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Longitude da estrutura",
+                            "id": 9
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Dimensão da estrutura em m²",
+                            "id": 10
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "ConstrucaoOuAmpliacaoSemOcupante": [
+        {
+            "infractionType": "Construção e/ou ampliação sem presença do ocupante/proprietário/posseiro/funcionário com impedimento de regeneração de vegetação",
+            "infractionLaw": "Art. 48.da Resolução SIMA N° 05/2021 Impedir ou dificultar a regeneração natural de florestas ou demais formas de vegetação nativa em unidades de conservação ou outras áreas especialmente protegidas, quando couber, área de preservação permanente, reserva legal ou demais locais cuja regeneração tenha sido indicada pela autoridade ambiental competente. Multa de R$ 5.000,00 (cinco mil reais), por hectare ou fração. Parágrafo único - O disposto no caput não se aplica para o uso permitido das áreas de preservação permanente.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 9
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 10
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario" : 
+                        {
+                            "type": "date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+
+                },
+
+                {
+                    "name": "Dados do ultimo ocupante",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do ocupante",
+                            "id": 11
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "CPF do ocupante",
+                            "id": 12
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "RG do ocupante",
+                            "id": 13
+                        }
+
+                    ]
+                },
+
+                {
+                    "name": "Informação da estrutura",
+                    "Informação da estrutura": [
+                        {
+                            "type": "string",
+                            "name": "Tipo da estrutura",
+                            "id": 5
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Latitude da estrutura",
+                            "id": 6
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Longitude da estrutura",
+                            "id": 7
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Dimensão da estrutura em m²",
+                            "id": 8
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "ConstrucaoOuAmpliacaoComOcupanteComCorte": [
+        {
+            "infractionType": "Construção e/ou ampliação com presença do ocupante/proprietário/posseiro/funcionário com corte de árvores isoladas",
+            "infractionLaw": "Art. 48.da Resolução SIMA N° 05/2021 Impedir ou dificultar a regeneração natural de florestas ou demais formas de vegetação nativa em unidades de conservação ou outras áreas especialmente protegidas, quando couber, área de preservação permanente, reserva legal ou demais locais cuja regeneração tenha sido indicada pela autoridade ambiental competente. Multa de R$ 5.000,00 (cinco mil reais), por hectare ou fração. Parágrafo único - O disposto no caput não se aplica para o uso permitido das áreas de preservação permanente. Art. 44.da Resolução SIMA N° 05/2021 Cortar árvores em área considerada de preservação permanente, ou cuja espécie seja especialmente protegida, sem autorização da autoridade competente, quando exigível: Multa de R$ 500,00 (quinhentos reais) por árvore ou metro cúbico, pelo corte seletivo ou isolado de exemplares arbóreos nativos ou exóticos em área considerada de preservação permanente ou cuja espécie seja especialmente protegida.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 12
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 13
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario" : 
+                        {
+                            "type": "date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator qualificado",
+                            "id": 6
+                        },
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator flagrado executando a construção",
+                            "id": 7
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Informação da estrutura",
+                    "Informação da estrutura": [
+                        {
+                            "type": "string",
+                            "name": "Tipo da estrutura",
+                            "id": 8
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Latitude da estrutura",
+                            "id": 9
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Longitude da estrutura",
+                            "id": 10
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Dimensão da estrutura em m²",
+                            "id": 11
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados das árvores",
+                    "Informação das árvores": [
+                        {
+                            "type": "integer",
+                            "name": "Quantidade de árvores cortadas",
+                            "id": 5
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Estrutura mais próxima",
+                            "id": 14
+                        },
+                        
+                        {
+                            "type": "string",
+                            "name": "Espécie da árvore",
+                            "id": 15
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Latitude das árvores",
+                            "id": 16
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Longitude das árvores",
+                            "id": 17
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "ConstrucaoOuAmpliacaoSemOcupanteComCorte": [
+        {
+            "infractionType": "Construção e/ou ampliação sem presença do ocupante/proprietário/posseiro/funcionário com corte de árvores isoladas",
+            "infractionLaw": "Art. 48.da Resolução SIMA N° 05/2021 Impedir ou dificultar a regeneração natural de florestas ou demais formas de vegetação nativa em unidades de conservação ou outras áreas especialmente protegidas, quando couber, área de preservação permanente, reserva legal ou demais locais cuja regeneração tenha sido indicada pela autoridade ambiental competente. Multa de R$ 5.000,00 (cinco mil reais), por hectare ou fração. Parágrafo único - O disposto no caput não se aplica para o uso permitido das áreas de preservação permanente. Art. 44.da Resolução SIMA N° 05/2021 Cortar árvores em área considerada de preservação permanente, ou cuja espécie seja especialmente protegida, sem autorização da autoridade competente, quando exigível: Multa de R$ 500,00 (quinhentos reais) por árvore ou metro cúbico, pelo corte seletivo ou isolado de exemplares arbóreos nativos ou exóticos em área considerada de preservação permanente ou cuja espécie seja especialmente protegida.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 10
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 11
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario" : 
+                        {
+                            "type": "date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+
+                },
+
+                {
+                    "name": "Informação da estrutura",
+                    "Informação da estrutura": [
+                        {
+                            "type": "string",
+                            "name": "Tipo da estrutura",
+                            "id": 6
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Latitude da estrutura",
+                            "id": 7
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Longitude da estrutura",
+                            "id": 8
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Dimensão da estrutura em m²",
+                            "id": 9
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados do ultimo ocupante",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do ocupante",
+                            "id": 16
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "CPF do ocupante",
+                            "id": 17
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "RG do ocupante",
+                            "id": 18
+                        }
+
+                    ]
+                },
+
+                {
+                    "name": "Dados das árvores",
+                    "Informação das árvores": [
+                        {
+                            "type": "integer",
+                            "name": "Quantidade de árvores cortadas",
+                            "id": 5
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Estrutura mais próxima",
+                            "id": 12
+                        },
+                        
+                        {
+                            "type": "string",
+                            "name": "Espécie da árvore",
+                            "id": 13
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Latitude das árvores",
+                            "id": 14
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Longitude das árvores",
+                            "id": 15
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "ConstrucaoOuAmpliacaoComOcupanteComSupressao": [
+        {
+            "infractionType": "Construção e/ou ampliação com presença do ocupante/proprietário/posseiro/funcionário com supressão de vegetação",
+            "infractionLaw": "Art. 49 da Resolução SIMA N° 05/2021 Destruir ou danificar florestas ou qualquer tipo de vegetação nativa ou de espécies nativas plantadas, objeto de especial preservação, sem autorização ou licença do órgão ambiental competente. Art. 48 da Resolução SIMA N° 05/2021 Impedir ou dificultar a regeneração natural de florestas ou demais formas de vegetação nativa em unidades de conservação ou outras áreas especialmente protegidas, quando couber, área de preservação permanente, reserva legal ou demais locais cuja regeneração tenha sido indicada pela autoridade ambiental competente. Multa de R$ 5.000,00 (cinco mil reais), por hectare ou fração. Parágrafo único - O disposto no caput não se aplica para o uso permitido das áreas de preservação permanente.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 11
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 12
+                        },
+                        {
+                            "type": "integer",
+                            "name": "Área total suprimida em m²",
+                            "id": 13
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario" : 
+                        {
+                            "type": "date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+
+                },
+
+                {
+                    "name": "Dados do Infrator",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator qualificado",
+                            "id": 5
+                        },
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator flagrado executando a construção",
+                            "id": 6
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Informação da estrutura",
+                    "Informação da estrutura": [
+                        {
+                            "type": "string",
+                            "name": "Tipo da estrutura",
+                            "id": 7
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Latitude da estrutura",
+                            "id": 8
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Longitude da estrutura",
+                            "id": 9
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Dimensão da estrutura em m²",
+                            "id": 10
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "ConstrucaoOuAmpliacaoSemOcupanteComSupressao": [
+        {
+            "infractionType": "Construção e/ou ampliação sem presença do ocupante/proprietário/posseiro/funcionário com supressão de vegetação",
+            "infractionLaw": "Art. 49 da Resolução SIMA N° 05/2021 Destruir ou danificar florestas ou qualquer tipo de vegetação nativa ou de espécies nativas plantadas, objeto de especial preservação, sem autorização ou licença do órgão ambiental competente. Art. 48 da Resolução SIMA N° 05/2021 Impedir ou dificultar a regeneração natural de florestas ou demais formas de vegetação nativa em unidades de conservação ou outras áreas especialmente protegidas, quando couber, área de preservação permanente, reserva legal ou demais locais cuja regeneração tenha sido indicada pela autoridade ambiental competente. Multa de R$ 5.000,00 (cinco mil reais), por hectare ou fração. Parágrafo único - O disposto no caput não se aplica para o uso permitido das áreas de preservação permanente.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a companhia", "Integrada ao batalhão"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Local",
+                    "Local": [
+                        {
+                            "type": "string",
+                            "name": "Estrada",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Bairro",
+                            "id": 2
+                        },
+                        {
+                            "type": "string",
+                            "name": "Setor",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Latitude do parque",
+                            "id": 9
+                        },
+                        {
+                            "type": "string",
+                            "name": "Longitude do parque",
+                            "id": 10
+                        }
+                    ]
+                },
+
+                {
+
+                    "name": "Horario",
+                    "Horario" : 
+                        {
+                            "type": "date",
+                            "name": "Horário da infração",
+                            "id": 4
+                        }
+
+                },
+
+                {
+                    "name": "Dados do último ocupante",
+                    "Dados do Infrator": [
+                        {
+                            "type": "string",
+                            "name": "Nome do ocupante",
+                            "id": 11
+                        },
+                        {
+                            "type": "string",
+                            "name": "CPF do ocupante",
+                            "id": 12
+                        },
+                        {
+                            "type": "string",
+                            "name": "RG do ocupante",
+                            "id": 13
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Informação da estrutura",
+                    "Informação da estrutura": [
+                        {
+                            "type": "string",
+                            "name": "Tipo da estrutura",
+                            "id": 5
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Latitude da estrutura",
+                            "id": 6
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Longitude da estrutura",
+                            "id": 7
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Dimensão da estrutura em m²",
+                            "id": 8
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "Carvao": [
+        {
+            "infractionType": "Indivíduo flagrado transformando madeira em carvão",
+            "infractionLaw": "Art.45 da Lei Federal nº 9.605/1998 (madeira de lei)",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do infrator",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Espécie da madeira",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "TransporteMadeira": [
+        {
+            "infractionType": "Indivíduo flagrado transportando madeira sem autorização",
+            "infractionLaw": "Art.45 da Lei Federal nº 9.605/1998 (madeira de lei)",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do infrator",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Qualificado por",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ] ,
+
+    "RocadaComInfrator": [
+        {
+            "infractionType": "Indivíduo roçando área com vegetação em estágio pioneiro",
+            "infractionLaw": "art. 48 da Lei Federal nº 9.605/1998.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do infrator",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Qualificado por",
+                            "id": 2
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados da vegetação",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Tipo de vegetação",
+                            "id": 3
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Área correspondente",
+                            "id": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "RocadaSemInfrator": [
+        {
+            "infractionType": "Área roçada sem a presença do infrator/propietário/posseiro",
+            "infractionLaw": "art. 48 da Lei Federal nº 9.605/1998.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados da infração",
+                    "Dados da infração":[
+                        {
+                            "type": "string",
+                            "name": "Tipo do crime",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Pertencente da propriedade",
+                            "id": 5
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados da vegetação",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Tipo de vegetação",
+                            "id": 3
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Área correspondente",
+                            "id": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "Desmatamento": [
+        {
+            "infractionType": "Indivíduo destruindo floresta ou qualquer tipo de vegetação nativa",
+            "infractionLaw": "art. 50 da Lei Federal nº 9.605/1998.",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados da infração",
+                    "Dados da infração":[
+                        {
+                            "type": "string",
+                            "name": "Tipo do crime",
+                            "id": 1
+                        },
+                        {
+                            "type": "string",
+                            "name": "Tipo de infração",
+                            "id": 5
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados da vegetação",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Tipo de vegetação",
+                            "id": 3
+                        },
+                        {
+                            "type": "string",
+                            "name": "Área em hectares",
+                            "id": 2
+                        },
+
+                        {
+                            "type": "string",
+                            "name": "Estágio da vegetação",
+                            "id": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "EspecieExoticaFlora": [
+        {
+            "infractionType": "Quando na área for identificado plantio de espécies não pertencentes a vegetação nativa",
+            "infractionLaw": "Art. 40 da Lei Federal nº 9.605/1998 (ref flora).",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do infrator",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados da vegetação",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Espécie da vegetação",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "Areia": [
+        {
+            "infractionType": "Indivíduo flagrado retirando areia do rio",
+            "infractionLaw": "Art.44 da Lei Federal nº 9.605/1998",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do infrator",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados do solo",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Tipo de solo",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "Visitacao": [
+        {
+            "infractionType": "Indivíduo for encontrado visitando atrativos da UC sem autorização",
+            "infractionLaw": "Art. 40 da Lei Federal nº 9.605/1998",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do infrator",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "Pesquisa": [
+        {
+            "infractionType": "Indivíduo flagrado dentro da UC desenvolvendo pesquisa sem autorização",
+            "infractionLaw": "Art 40 e Art. 55 da Lei Federal nº 9.605/1998 (ref. recursos minerais).",
+            "components": [
+                {
+                    "name": "Fiscalização",
+                    "Fiscalização":
+                        {
+                            "type": "dropdown",
+                            "dropdown": ["Rotina", "Integrada ao pelotão", "Integrada a DEJEM"],
+                            "id": 0
+                        }
+                },
+
+                {
+                    "name": "Dados do infrator",
+                    "Dados do infrator":[
+                        {
+                            "type": "string",
+                            "name": "Nome do infrator",
+                            "id": 1
+                        }
+                    ]
+                },
+
+                {
+                    "name": "Dados da infração",
+                    "Dados da infração":[
+                        {
+                            "type": "boolean",
+                            "name": "Envolve ou não a coleta de material biológico",
+                            "id": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+
+
+
+}

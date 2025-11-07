@@ -4,8 +4,9 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { AutoInfracaoModule } from './autoInfracao/autoInfracao.module';
+import { RelatoriodiarioModule } from './relatoriodiario/relatoriodiario.module';
 @Module({
-  imports: [PrismaModule, AuthModule, AutoInfracaoModule],
+  imports: [PrismaModule, AuthModule, AutoInfracaoModule, RelatoriodiarioModule],
   controllers: [],
   providers: [
     {

@@ -98,7 +98,10 @@ enum TipoVeiculoAbordado {
   caminhao
   onibusVan
 }
-
+enum tipo_usuario {
+  administrador
+  fiscal
+}
 model relatoriodiario {
   id                                 Int      @id @default(autoincrement())
   equipe                             Equipe
