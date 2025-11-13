@@ -9,6 +9,7 @@ import {
   Put,
   Request,
   UseGuards,
+  BadRequestException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -52,13 +53,13 @@ export class AuthController {
 
   @IsSelf()
   @Put('updatePassword')
-  async resetPassword(@Body() req: updatePassword) {
-    // Exemplo simplificado:
+  async resetPassword(@Body() body: updatePassword, @Request() req: AuthRequest) {
+    // Pega o ID do usuário autenticado do token JWT
     return this.authService.updatePassword(
-      req.cpf,
-      req.senhaAntiga,
-      req.novaSenha,
-      req.confirmaSenha,
+      req.user.id,
+      body.senhaAntiga,
+      body.novaSenha,
+      body.confirmaSenha,
     );
   }
 
@@ -66,12 +67,15 @@ export class AuthController {
   @UseGuards(AdminGuard)
   @Put('reset')
   @IsAdmin()
-  async updatePassword(@Body() req: updatePassword) {
-    // Exemplo simplificado:
+  async updatePassword(@Body() body: updatePassword) {
+    // Para admin resetar senha de usuário por CPF
+    if (!body.cpf) {
+      throw new BadRequestException('CPF é obrigatório para esta operação');
+    }
     return this.authService.updateOwnPassword(
-      req.novaSenha,
-      req.confirmaSenha,
-      req.cpf,
+      body.novaSenha,
+      body.confirmaSenha,
+      body.cpf,
     );
   }
 
@@ -79,12 +83,15 @@ export class AuthController {
   @UseGuards(AdminGuard)
   @Put('resetAny')
   @IsAdmin()
-  async updateAnyPassword(@Body() req: updatePassword) {
-    // Exemplo simplificado:
+  async updateAnyPassword(@Body() body: updatePassword) {
+    // Admin pode resetar senha de qualquer usuário
+    if (!body.senhaAdm || !body.cpf) {
+      throw new BadRequestException('Senha do administrador e CPF são obrigatórios');
+    }
     return this.authService.updateAnyPassword(
-      req.senhaAdm,
-      req.cpf,
-      req.novaSenha,
+      body.senhaAdm,
+      body.cpf,
+      body.novaSenha,
     );
   }
 
