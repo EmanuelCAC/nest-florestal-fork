@@ -13,7 +13,11 @@ export class RelatoriodiarioService {
         processado: false,
       },
       include: {
-        autoinfracao: true,
+        autoinfracao: {
+          include: {
+            exemplocaso: true,
+          },
+        },
       },
       orderBy: {
         data_hora_inicio_acao: 'asc',
