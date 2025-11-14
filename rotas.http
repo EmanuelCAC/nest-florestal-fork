@@ -1,12 +1,42 @@
+### login - Admin
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+  "cpf": "12345678901",
+  "senha": "5enha#"
+}
+
 ### login
 POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
   "cpf": "55544433322",
-  "senha": "Teste@123"
+  "senha": "Teste@12345"
+}
+
+
+### resetOtherUserPassword
+PUT http://localhost:3000/auth/resetAny
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiIxMjM0NTY3ODkwMSIsIm5vbWUiOiJ0ZXN0ZSIsInRpcG8iOiJBZG1pbiIsImlhdCI6MTc2MzE0ODY5MywiZXhwIjoxNzYzMTYzMDkzfQ.eG3Uho0heKGWVezPcGj90Y2EsCItw4bm2YdkwXe4p10
+
+{
+  "id": 86,
+  "senhaAdm": "5enha#",
+  "novaSenha": "Teste@12345"
+}
+
+### DeleteUser
+DELETE http://localhost:3000/auth/delete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiIxMjM0NTY3ODkwMSIsIm5vbWUiOiJ0ZXN0ZSIsInRpcG8iOiJBZG1pbiIsImlhdCI6MTc2MzE0ODY5MywiZXhwIjoxNzYzMTYzMDkzfQ.eG3Uho0heKGWVezPcGj90Y2EsCItw4bm2YdkwXe4p10
+
+{
+  "id": 86
 }
 
 ### All users
 GET http://localhost:3000/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1NTU0NDQzMzMyMiIsIm5vbWUiOiJUZXN0ZSIsInRpcG8iOiJDYW1wbyIsImlhdCI6MTc2MzE0Njk0MSwiZXhwIjoxNzYzMTYxMzQxfQ.Vu2ldtqCifC8r0TB2JymyREPf-KuoAMavg5sFKyhRyk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiIxMjM0NTY3ODkwMSIsIm5vbWUiOiJ0ZXN0ZSIsInRpcG8iOiJBZG1pbiIsImlhdCI6MTc2MzE0ODY5MywiZXhwIjoxNzYzMTYzMDkzfQ.eG3Uho0heKGWVezPcGj90Y2EsCItw4bm2YdkwXe4p10

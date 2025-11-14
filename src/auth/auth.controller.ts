@@ -77,23 +77,22 @@ export class AuthController {
 
   //rota para reset de qualquer usário. Restrita a Admins
   @UseGuards(AdminGuard)
-  @Put('resetAny')
   @IsAdmin()
-  async updateAnyPassword(@Body() req: updatePassword) {
+  @Put('resetAny')
+  async updateAnyPassword(@Body() req: updatePassword, @Request() request: AuthRequest) {
     // Exemplo simplificado:
     return this.authService.updateAnyPassword(
-      req.senhaAdm,
-      req.cpf,
+      req.senhaAdm || "",
+      req.id,
       req.novaSenha,
+      (request.headers as any)['authorization'] ?? "",
     );
   }
 
   @UseGuards(AdminGuard)
-  @IsAdmin() // marca essa rota como apenas para admins
+  @IsAdmin() 
   @Delete('delete')
   async deleteUser(@Body() req: DeleteRequest) {
-    // Aqui você chama o service que faz a exclusão do usuário no banco
-    // Exemplo simplificado:
-    return await this.authService.deleteUserByCpf(req.cpf);
+    return await this.authService.deleteUserById(req.id);
   }
 }
