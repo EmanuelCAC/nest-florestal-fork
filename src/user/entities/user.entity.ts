@@ -5,6 +5,7 @@ export enum tipo_usuario {
 }
 
 export class User {
+  id?: number;
   cpf: string;
   nome: string;
   senha: string;

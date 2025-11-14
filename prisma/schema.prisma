@@ -10,11 +10,11 @@ datasource db {
 model autoinfracao {
   id                Int              @id @default(autoincrement())
   data_emissao      DateTime         
-  id_fiscal         String           @db.VarChar(11)
+  id_fiscal         Int
   id_exemplocaso    Int
   descricao         String           @db.Text
   relatoriodiarioId Int?
-  fiscal            fiscal           @relation(fields: [id_fiscal], references: [id_fiscal], onDelete: Cascade)
+  fiscal            fiscal           @relation(fields: [id_fiscal], references: [id], onDelete: Cascade)
   exemplocaso       exemplocaso      @relation(fields: [id_exemplocaso], references: [id], onDelete: Cascade)
   relatoriodiario   relatoriodiario? @relation(fields: [relatoriodiarioId], references: [id])
 
@@ -42,7 +42,7 @@ model exemplocaso {
 
 model fiscal {
   id              Int               @id @default(autoincrement())
-  cpf             String            @unique @db.Text
+  cpf             String            @unique @db.VarChar(11)
   nome            String
   senha           String
   tipo            tipo_usuario
