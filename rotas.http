@@ -1,0 +1,12 @@
+### login
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+  "cpf": "55544433322",
+  "senha": "Teste@123"
+}
+
+### All users
+GET http://localhost:3000/users/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1NTU0NDQzMzMyMiIsIm5vbWUiOiJUZXN0ZSIsInRpcG8iOiJDYW1wbyIsImlhdCI6MTc2MzE0Njk0MSwiZXhwIjoxNzYzMTYxMzQxfQ.Vu2ldtqCifC8r0TB2JymyREPf-KuoAMavg5sFKyhRyk

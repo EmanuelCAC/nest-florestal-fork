@@ -28,7 +28,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @UseGuards(AdminGuard)
-  @IsPublic()
+  @IsAdmin()
   @Post('signup')
   signup(@Body() user: CreateUserDto) {
   return this.authService.signup({

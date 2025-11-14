@@ -12,4 +12,10 @@ export class UserService {
       select: { cpf: true, nome: true, senha: true, tipo: true },
     });
   }
+
+  findAll() {
+    return this.prisma.fiscal.findMany({
+      select: { id: true, nome: true, tipo: true },
+    });
+  }
 }
