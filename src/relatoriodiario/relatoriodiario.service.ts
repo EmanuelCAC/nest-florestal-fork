@@ -1,6 +1,6 @@
 // src/relatoriodiario/relatoriodiario.service.ts
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -17,6 +17,26 @@ export class RelatoriodiarioService {
       },
       orderBy: {
         data_hora_inicio_acao: 'asc',
+      },
+    });
+  }
+
+  async markAsProcessed(id: number) {
+    const relatorio = await this.prisma.relatoriodiario.findUnique({
+      where: { id },
+    })
+
+    if (!relatorio) {
+      throw new NotFoundException(`Relatório diário com ID ${id} não encontrado`);
+    }
+
+    return this.prisma.relatoriodiario.update({
+      where: { id },
+      data: {
+        processado: true,
+      },
+      include: {
+        autoinfracao: true,
       },
     });
   }

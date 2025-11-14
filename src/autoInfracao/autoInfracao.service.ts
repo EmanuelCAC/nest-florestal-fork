@@ -1,83 +1,89 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateRelatorioDto } from './dto/create-relatorio.dto';
 
 @Injectable()
 export class AutoInfracaoService {
-    constructor(private prisma: PrismaService) {}
-    
-    async getInfracoes() {
-        const autosNaoDespachados = await this.prisma.infracao.findMany();
-        return autosNaoDespachados;
+  constructor(private prisma: PrismaService) {}
+
+  async getExemplosDeCasos() {
+    const exemploDeCasos = await this.prisma.exemplocaso.findMany();
+    return exemploDeCasos;
+  }
+
+  private convertToISO8601(dateString: string): Date {
+    // Formato esperado: "31/10/2025 20:51"
+    if (!dateString || typeof dateString !== 'string') {
+      throw new Error('Invalid date string');
+    }
+    dateString = dateString.replace(',', '').trim();
+    const parts = dateString.split(' ');
+    if (parts.length !== 2) {
+      throw new Error('Date must be in format DD/MM/YYYY HH:MM');
+    }
+    const [datePart, timePart] = parts;
+    const dateParts = datePart.split('/');
+    const timeParts = timePart.split(':');
+    if (dateParts.length !== 3 || timeParts.length !== 2) {
+      throw new Error('Invalid date format');
+    }
+    const [day, month, year] = dateParts.map(p => parseInt(p, 10));
+    const [hour, minute] = timeParts.map(p => parseInt(p, 10));
+    if ([day, month, year, hour, minute].some(isNaN)) {
+      throw new Error('Date contains non-numeric values');
+    }
+    // Optionally, check for valid ranges (day: 1-31, month: 1-12, hour: 0-23, minute: 0-59)
+    if (
+      day < 1 || day > 31 ||
+      month < 1 || month > 12 ||
+      hour < 0 || hour > 23 ||
+      minute < 0 || minute > 59
+    ) {
+      throw new Error('Date contains out-of-range values');
+    }
+    return new Date(year, month - 1, day, hour, minute);
+  }
+
+  async createRelatorio(body: CreateRelatorioDto, requisicao: any) {
+    //verificar se fiscal autenticado
+    const fiscal = await this.prisma.fiscal.findUnique({
+      where: { cpf: requisicao.cpf },
+    });
+
+    //verificar se fiscal autenticado
+    if (!fiscal) {
+      throw new Error('Fiscal nao autenticado');
     }
 
-    async postInfracao(relatorio, cpf) 
-    {
-        try{
+    // remover autoinfracao do body
+    const { autoinfracao, data_hora_inicio_acao, data_hora_termino_acao, ...rest } = body;
+    const dataHoraInicioISO = this.convertToISO8601(data_hora_inicio_acao);
+    const dataHoraTerminoISO = this.convertToISO8601(data_hora_termino_acao);
 
+    // criar relatorio
+    const relatorio = await this.prisma.relatoriodiario.create({
+      data: {
+        ...rest,
+        data_hora_inicio_acao: dataHoraInicioISO,
+        data_hora_termino_acao: dataHoraTerminoISO,
+        fiscalId: fiscal.id,
+      },
+    });
 
-            const fiscal = await this.prisma.fiscal.findUnique({where: {CPF: cpf}});
-    
-            if (!fiscal) {
-                throw new Error('Fiscal nao encontrado');
-            }
-    
-            await this.prisma.relatorioDiario.create({data: 
-                {
-                    equipes: relatorio.equipes,
-                    equipe_em_atuacao: relatorio.equipe_em_atuacao,
-                    orgaos_e_instituicoes_envolvadas: relatorio.orgaos_e_instituicoes_envolvadas,
-                    responsavel: relatorio.responsavel,
-                    data_hora_inicio_acao: relatorio.data_hora_inicio_acao,
-                    data_hora_termino_acao: relatorio.data_hora_termino_acao,
-                    origem: relatorio.origem,
-                    registro_ocorrencia: relatorio.registro_ocorrencia,
-                    area_fiscalizada: relatorio.area_fiscalizada,
-                    municipios: relatorio.municipios,
-                    setores: relatorio.setores,
-                    especificacao_local: relatorio.especificacao_local,
-                    relatorio: relatorio.relatorio,
-                    outras_atividades: relatorio.outras_atividades,
-                    cordenadas: relatorio.cordenadas,
-                    placa_vtr: relatorio.placa_vtr,
-                    km_inicio: relatorio.km_inicio,
-                    km_final: relatorio.km_final,
-                    condicoes_vtr: relatorio.condicoes_vtr,
-                    tipo_acao: relatorio.tipo_acao,
-                    veiculos_aborados: relatorio.veiculos_aborados,
-                    tipo_veiculo_aborado: relatorio.tipo_veiculo_aborado,
-                    descricao_veiculos: relatorio.descricao_veiculos,
-                    km_percorrido: relatorio.km_percorrido,
-                    horas: relatorio.horas, 
-                    autoinfracao: relatorio.infracoes.autoinfracao.id,
-                    fiscal: fiscal.id
-                }
-            })
-    
-            await this.prisma.autoInfracao.create({data: 
-                {
-                    data_emissao: relatorio.infracoes.autoinfracao.data_emissao,
-                    cpf: relatorio.infracoes.autoinfracao.cpf,
-                    lat: relatorio.infracoes.autoinfracao.lat,
-                    lon: relatorio.infracoes.autoinfracao.lon,
-                    id_exemplocaso: relatorio.infracoes.autoinfracao.id_exemplocaso,
-                    descricao: relatorio.infracoes.autoinfracao.descricao,
-                    relatoriodiarioId: relatorio.infracoes.autoinfracao.relatoriodiarioId
-                }
-            })
-    
-            return "AutoInfracao criada com sucesso";
-    
-    
-        }
-        catch (error) {
-            console.log(error);
-        }
-        }
+    if (autoinfracao) {
+      await this.prisma.autoinfracao.createMany({
+        data: autoinfracao.map((auto) => ({
+          id_exemplocaso: auto.id_exemplocaso,
+          descricao: auto.descricao,
+          data_emissao: this.convertToISO8601(auto.data),
+          cpf: fiscal.cpf,
+          relatoriodiarioId: relatorio.id,
+        })),
+      });
+    }
 
-
-
-
-
+    return { status: 'success', message: 'Relatório criado com sucesso' };
+  }
 }
 
 
