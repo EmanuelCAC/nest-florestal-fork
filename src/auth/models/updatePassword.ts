@@ -1,6 +1,7 @@
 export interface updatePassword {
+    id: number;
     cpf: string;
-    senhaAdm?;
+    senhaAdm?: string;
     senhaAntiga: string;
     novaSenha: string;
     confirmaSenha: string;

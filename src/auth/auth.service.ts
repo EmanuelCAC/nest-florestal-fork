@@ -99,8 +99,6 @@ export class AuthService {
       tipo: verifyUser.tipo,
     };
 
-    console.log(verifyUser);
-
     //gerar token
     return {
       status: 'success',
@@ -191,18 +189,19 @@ export class AuthService {
   //Rota para administradores. Atualizar senha de qualquer usuário
   async updateAnyPassword(
     adminPassword: string,
-    targetcpf: string,
+    targetId: number,
     newPassword: string,
+    authorization: string,
   ) {
     // Buscar o usuário alvo (cuja senha será alterada)
-    const user = await this.userService.findByCpf(targetcpf);
+    const user = await this.userService.findById(targetId);
 
     if (!user) {
       throw new NotFoundException('Usuário não encontrado');
     }
 
     // Extrair cpf do admin autenticado (exemplo: vindo do token)
-    const admincpf = extractCpfFromToken['cpf'];
+    const admincpf = extractCpfFromToken(authorization);
     const adminUser = await this.userService.findByCpf(admincpf);
 
     if (!adminUser) {
@@ -225,22 +224,21 @@ export class AuthService {
 
     //atualizar senha do usuario alvo
     await this.prisma.fiscal.update({
-      where: { cpf: user.cpf },
+      where: { id: user.id },
       data: { senha: hashedNewPassword },
     });
 
     return { status: 'success', message: 'senha alterada com sucesso' };
   }
 
-  async deleteUserByCpf(cpf: string) {
-    //verificar se cpf exite:
-    const user = await this.userService.findByCpf(cpf);
+  async deleteUserById(id: number) {
+    const user = await this.userService.findById(id);
 
     if (!user) {
       return { message: 'Usuário nao encontrado' };
     }
-    //se chegou aqui, significa que o cpf existe
-    await this.prisma.fiscal.delete({ where: { cpf: user.cpf } });
+
+    await this.prisma.fiscal.delete({ where: { id: user.id } });
 
     return { status: 'success', message: 'Usuário excluido com sucesso' };
   }

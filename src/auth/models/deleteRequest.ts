@@ -1,3 +1,3 @@
 export interface DeleteRequest {
-    cpf: string;
+    id: number;
 }
