@@ -28,13 +28,17 @@ import { tipo_usuario } from 'src/user/entities/user.entity';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  
+
   @UseGuards(AdminGuard)
   @IsPublic()
   @Post('signup')
   signup(@Body() user: CreateUserDto) {
+    
     return this.authService.signup({
       ...user,
       tipo: tipo_usuario[user.tipo as keyof typeof tipo_usuario],
+      
     });
   }
 

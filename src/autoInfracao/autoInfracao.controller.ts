@@ -21,9 +21,4 @@ export class AutoInfracaoController {
     return this.autoInfracaoService.createRelatorio(body, req.user);
   }
 
-  @IsPublic()
-  @Post('infracao')
-  postInfracao(@Body() relatorio : relatorioDiarioDto, @Req() req) {
-    return this.autoInfracaoService.postInfracao(relatorio, req.user.cpf);
-  }
 }

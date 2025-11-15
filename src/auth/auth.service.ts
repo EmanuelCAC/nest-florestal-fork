@@ -80,7 +80,7 @@ export class AuthService {
 
     //verificar se cpf exite:
     const verifyUser = await this.prisma.fiscal.findUnique({
-      where: { cpf: hashedCpf},
+      where: { cpf: user.cpf},
     });
 
     if (!verifyUser) throw new NotFoundException('Usuário nao encontrado');
