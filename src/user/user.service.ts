@@ -21,8 +21,14 @@ export class UserService {
   }
 
   findAll() {
-    return this.prisma.fiscal.findMany({
-      select: { id: true, nome: true, tipo: true },
-    });
+    try {
+      return this.prisma.fiscal.findMany({
+        select: { id: true, nome: true, tipo: true },
+      });
+    } catch (error) {
+      // Handle error appropriately
+      console.log(error)
+      throw error;
+    }
   }
 }
