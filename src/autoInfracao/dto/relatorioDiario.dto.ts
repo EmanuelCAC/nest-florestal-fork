@@ -21,8 +21,8 @@ export class relatorioDiarioDto {
     km_final: number;
     condicoes_vtr: string;
     tipo_acao: string;
-    veiculos_aborados: string;
-    tipo_veiculo_aborado: string;
+    veiculos_abordados: string;
+    tipo_veiculo_abordado: string;
     descricao_veiculos: string;
     km_percorrido: number;
     horas: number;
