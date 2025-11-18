@@ -10,7 +10,7 @@ import { User } from 'src/user/entities/user.entity';
 import { UserPayload } from './models/userPayload';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { extractCpfFromToken } from './middleware/verify-cpf';
+import { extractIdFromToken } from './middleware/verify-user-id';
 import { LoginUserDto } from 'src/user/dto/login-user.dto';
 import { tipo_usuario } from 'src/user/entities/user.entity';
 
@@ -59,7 +59,7 @@ export class AuthService {
 
     //payload para o token
     const payload: UserPayload = {
-      cpf: user.cpf,
+      id: newUser.id,
       nome: user.nome,
       tipo: user.tipo,
     };
@@ -80,7 +80,7 @@ export class AuthService {
 
     //verificar se cpf exite:
     const verifyUser = await this.prisma.fiscal.findUnique({
-      where: { cpf: hashedCpf},
+      where: { cpf: user.cpf},
     });
 
     if (!verifyUser) throw new NotFoundException('Usuário nao encontrado');
@@ -94,7 +94,7 @@ export class AuthService {
 
     //payload para o token
     const payload: UserPayload = {
-      cpf: user.cpf,
+      id: verifyUser.id,
       nome: verifyUser.nome,
       tipo: verifyUser.tipo,
     };
@@ -114,7 +114,7 @@ export class AuthService {
   // //verificar perfil para
   // profile(user: User) {
   //   const payload: UserPayload = {
-  //     cpf: user.cpf,
+  //     id: user.id,
   //     nome: user.nome,
   //     tipo: user.tipo
   //   };
@@ -124,13 +124,13 @@ export class AuthService {
 
   //atualizar senha. Rota para usuário logado
   async updatePassword(
-    cpf: string,
+    id: number,
     currentPassword: string,
     newPassword: string,
     newPasswordConfirm: string,
   ) {
-    //verificar se cpf exite:
-    const user = await this.userService.findByCpf(cpf);
+    //verificar se usuário existe:
+    const user = await this.userService.findById(id);
 
     if (!user) throw new NotFoundException('Usuário não encontrado');
 
@@ -151,7 +151,7 @@ export class AuthService {
 
     //atualizar senha
     await this.prisma.fiscal.update({
-      where: { cpf: user.cpf },
+      where: { id: user.id },
       data: { senha: hashedNewPassword },
     });
 
@@ -179,7 +179,7 @@ export class AuthService {
 
     //atualizar senha
     await this.prisma.fiscal.update({
-      where: { cpf: user.cpf },
+      where: { id: user.id },
       data: { senha: hashedNewPassword },
     });
 
@@ -200,9 +200,9 @@ export class AuthService {
       throw new NotFoundException('Usuário não encontrado');
     }
 
-    // Extrair cpf do admin autenticado (exemplo: vindo do token)
-    const admincpf = extractCpfFromToken(authorization);
-    const adminUser = await this.userService.findByCpf(admincpf);
+    // Extrair id do admin autenticado (exemplo: vindo do token)
+    const adminId = extractIdFromToken['id'];
+    const adminUser = await this.userService.findById(adminId);
 
     if (!adminUser) {
       throw new NotFoundException('Administrador não encontrado');

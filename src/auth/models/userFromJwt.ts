@@ -1,5 +1,5 @@
 export interface UserFromJwt {
-  cpf: string;
+  id: number;
   nome: string;
   tipo: string;
 }

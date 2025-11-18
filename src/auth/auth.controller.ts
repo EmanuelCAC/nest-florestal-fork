@@ -9,6 +9,7 @@ import {
   Put,
   Request,
   UseGuards,
+  BadRequestException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -27,13 +28,17 @@ import { tipo_usuario } from 'src/user/entities/user.entity';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  
+
   @UseGuards(AdminGuard)
   @IsAdmin()
   @Post('signup')
   signup(@Body() user: CreateUserDto) {
+    
     return this.authService.signup({
       ...user,
       tipo: tipo_usuario[user.tipo as keyof typeof tipo_usuario],
+      
     });
   }
 
@@ -52,13 +57,13 @@ export class AuthController {
 
   @IsSelf()
   @Put('updatePassword')
-  async resetPassword(@Body() req: updatePassword) {
-    // Exemplo simplificado:
+  async resetPassword(@Body() body: updatePassword, @Request() req: AuthRequest) {
+    // Pega o ID do usuário autenticado do token JWT
     return this.authService.updatePassword(
-      req.cpf,
-      req.senhaAntiga,
-      req.novaSenha,
-      req.confirmaSenha,
+      req.user.id,
+      body.senhaAntiga,
+      body.novaSenha,
+      body.confirmaSenha,
     );
   }
 
@@ -66,12 +71,15 @@ export class AuthController {
   @UseGuards(AdminGuard)
   @Put('reset')
   @IsAdmin()
-  async updatePassword(@Body() req: updatePassword) {
-    // Exemplo simplificado:
+  async updatePassword(@Body() body: updatePassword) {
+    // Para admin resetar senha de usuário por CPF
+    if (!body.cpf) {
+      throw new BadRequestException('CPF é obrigatório para esta operação');
+    }
     return this.authService.updateOwnPassword(
-      req.novaSenha,
-      req.confirmaSenha,
-      req.cpf,
+      body.novaSenha,
+      body.confirmaSenha,
+      body.cpf,
     );
   }
 
