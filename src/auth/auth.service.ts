@@ -189,11 +189,12 @@ export class AuthService {
   //Rota para administradores. Atualizar senha de qualquer usuário
   async updateAnyPassword(
     adminPassword: string,
-    targetcpf: string,
+    targetId: number,
     newPassword: string,
+    authorization: string,
   ) {
     // Buscar o usuário alvo (cuja senha será alterada)
-    const user = await this.userService.findByCpf(targetcpf);
+    const user = await this.userService.findById(targetId);
 
     if (!user) {
       throw new NotFoundException('Usuário não encontrado');
@@ -230,14 +231,13 @@ export class AuthService {
     return { status: 'success', message: 'senha alterada com sucesso' };
   }
 
-  async deleteUserByCpf(cpf: string) {
-    //verificar se cpf exite:
-    const user = await this.userService.findByCpf(cpf);
+  async deleteUserById(id: number) {
+    const user = await this.userService.findById(id);
 
     if (!user) {
       return { message: 'Usuário nao encontrado' };
     }
-    //se chegou aqui, significa que o cpf existe
+
     await this.prisma.fiscal.delete({ where: { id: user.id } });
 
     return { status: 'success', message: 'Usuário excluido com sucesso' };

@@ -20,4 +20,17 @@ export class UserService {
       select: { id: true, cpf: true, nome: true, senha: true, tipo: true },
     });
   }
+
+  findById(id: number) {
+    return this.prisma.fiscal.findUnique({
+      where: { id: id },
+      select: { id: true, nome: true, tipo: true },
+    });
+  }
+
+  findAll() {
+    return this.prisma.fiscal.findMany({
+      select: { id: true, nome: true, tipo: true },
+    });
+  }
 }
