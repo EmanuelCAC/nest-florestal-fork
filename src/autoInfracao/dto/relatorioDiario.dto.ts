@@ -15,7 +15,7 @@ export class relatorioDiarioDto {
     especificacao_local: string;
     relatorio: string;
     outras_atividades: string;
-    cordenadas: string;
+    coordenadas: string;
     placa_vtr: string;
     km_inicio: number;
     km_final: number;
