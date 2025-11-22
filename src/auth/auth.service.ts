@@ -12,8 +12,8 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { extractIdFromToken } from './middleware/verify-user-id';
 import { LoginUserDto } from 'src/user/dto/login-user.dto';
+import { cpfToHmac } from 'src/util/crypto.util';
 import { tipo_usuario } from 'src/user/entities/user.entity';
-
 
 @Injectable()
 export class AuthService {
@@ -23,83 +23,74 @@ export class AuthService {
     protected prisma: PrismaService,
   ) {}
 
-  //criar um novo usuário
-  
+  // MÉTODO MODIFICADO (signup)
   async signup(user: User) {
-    
-  const hashedCpf = await bcrypt.hash(user.cpf, 10);
-    // Verificar se o usuário já existe
+    // 2. Converta o CPF para HMAC para salvar e buscar
+    const hmacCpf = cpfToHmac(user.cpf);
+
+    // 3. Verifique se o usuário já existe (usando o HMAC e 'cpf' minúsculo)
     const userExists = await this.prisma.fiscal.findUnique({
-      where: { cpf: hashedCpf },
+      where: { cpf: hmacCpf },
     });
 
     if (userExists) {
       throw new Error('Usuário já existe');
     }
 
-    // Hash da senha para segurança
     const hashedPassword = await bcrypt.hash(user.senha, 10);
-  
-    // Criar o novo usuário
+
+    // 4. Crie o novo usuário (usando o HMAC e campos minúsculos)
     const newUser = await this.prisma.fiscal.create({
       data: {
-        cpf: hashedCpf,
+        cpf: hmacCpf, // Salva o HMAC
         nome: user.nome,
         senha: hashedPassword,
-        tipo: tipo_usuario[user.tipo],
+        tipo: user.tipo,
       },
     });
 
-    // Verificar se o usuário foi criado com sucesso
     if (!newUser) {
       throw new Error('Erro ao criar o usuário');
     }
 
-    // converter o tipo para string
-
-    //payload para o token
+    // 5. O Payload do JWT DEVE conter o CPF original (plaintext)
     const payload: UserPayload = {
       id: newUser.id,
       nome: user.nome,
       tipo: user.tipo,
     };
 
-    //gerar token
     const token = this.jwtService.sign(payload);
 
     return {
       status: 'success',
       message: 'Usuário registrado com sucesso!',
-      token,
     };
   }
 
-  //realizar login gerando token de acesso
+  // MÉTODO MODIFICADO (login)
   async login(user: LoginUserDto) {
-    const hashedCpf = await bcrypt.hash(user.cpf, 10);
+    // 6. Converta o CPF do login para HMAC antes de buscar
+    const hmacCpf = cpfToHmac(user.cpf);
 
-    //verificar se cpf exite:
+    // 7. Verifique se o cpf existe (usando o HMAC e 'cpf' minúsculo)
     const verifyUser = await this.prisma.fiscal.findUnique({
-      where: { cpf: user.cpf},
+      where: { cpf: hmacCpf },
     });
 
     if (!verifyUser) throw new NotFoundException('Usuário nao encontrado');
 
-    //verificar se a senha corresponde
     const isPasswordValid = await bcrypt.compare(user.senha, verifyUser.senha);
 
     if (!isPasswordValid) throw new UnauthorizedException('senha incorreta');
 
-    // converter o tipo para string
-
-    //payload para o token
+    // 9. O Payload do JWT DEVE conter o CPF original (plaintext)
     const payload: UserPayload = {
       id: verifyUser.id,
       nome: verifyUser.nome,
       tipo: verifyUser.tipo,
     };
 
-    //gerar token
     return {
       status: 'success',
       user: {
@@ -111,18 +102,6 @@ export class AuthService {
     };
   }
 
-  // //verificar perfil para
-  // profile(user: User) {
-  //   const payload: UserPayload = {
-  //     id: user.id,
-  //     nome: user.nome,
-  //     tipo: user.tipo
-  //   };
-
-  //   return this.jwtService.sign(payload);
-  // }
-
-  //atualizar senha. Rota para usuário logado
   async updatePassword(
     id: number,
     currentPassword: string,
@@ -141,15 +120,13 @@ export class AuthService {
       throw new BadRequestException('senha atual incorreta');
     }
 
-    //verificar se as senhas novas conferem
     if (newPassword !== newPasswordConfirm) {
       throw new BadRequestException('senhas nao conferem');
     }
 
-    //hash da nova senha
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
-    //atualizar senha
+    // 12. O 'user.cpf' retornado pelo service já é o HMAC
     await this.prisma.fiscal.update({
       where: { id: user.id },
       data: { senha: hashedNewPassword },
@@ -158,26 +135,24 @@ export class AuthService {
     return { status: 'success', message: 'senha atualizada com sucesso' };
   }
 
-  //Reset de senha. Rota somente para administradores
+  // MÉTODO MODIFICADO (updateOwnPassword)
   async updateOwnPassword(
     password: string,
     passwordConfirm: string,
-    cpf: string,
+    id: number,
   ) {
-    //verificar se cpf exite:
-    const user = await this.userService.findByCpf(cpf);
+    // 13. `userService.findByCpf` já lida com o HMAC
+    const user = await this.userService.findById(id);
 
     if (!user) throw new NotFoundException('Usuário nao encontrado');
 
-    //verificar se as senhas novas conferem
     if (password !== passwordConfirm) {
       throw new BadRequestException('senhas nao conferem');
     }
 
-    //hash da nova senha
     const hashedNewPassword = await bcrypt.hash(password, 10);
 
-    //atualizar senha
+    // 14. O 'user.cpf' retornado já é o HMAC
     await this.prisma.fiscal.update({
       where: { id: user.id },
       data: { senha: hashedNewPassword },
@@ -186,7 +161,7 @@ export class AuthService {
     return { status: 'success', message: 'senha atualizada com sucesso' };
   }
 
-  //Rota para administradores. Atualizar senha de qualquer usuário
+  // MÉTODO MODIFICADO (updateAnyPassword)
   async updateAnyPassword(
     adminPassword: string,
     targetId: number,
@@ -208,7 +183,7 @@ export class AuthService {
       throw new NotFoundException('Administrador não encontrado');
     }
 
-    // Verificar se a senha informada é a senha do admin
+    // 17. Corrija o nome do campo para 'senha'
     const passwordMatches = await bcrypt.compare(
       adminPassword,
       adminUser.senha,
@@ -218,11 +193,10 @@ export class AuthService {
       throw new BadRequestException('senha do administrador incorreta');
     }
 
-    // Atualizar a senha do usuário alvo
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
     user.senha = hashedNewPassword;
 
-    //atualizar senha do usuario alvo
+    // 18. O 'user.cpf' retornado já é o HMAC
     await this.prisma.fiscal.update({
       where: { id: user.id },
       data: { senha: hashedNewPassword },
@@ -243,7 +217,9 @@ export class AuthService {
     return { status: 'success', message: 'Usuário excluido com sucesso' };
   }
 
-  async validateUser(cpf: string, senha: string) {
+  // MÉTODO MODIFICADO (validateUser)
+  async validateUser(cpf: string, senha: string) { // CPF plaintext
+    // 21. `userService.findByCpf` lida com o HMAC
     const user = await this.userService.findByCpf(cpf);
 
     if (user) {
