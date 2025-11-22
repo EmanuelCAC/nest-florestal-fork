@@ -27,16 +27,16 @@ CREATE TABLE `exemplocaso` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `fiscal` (
-    `id` INTEGER NOT NULL,
-    `cpf` VARCHAR(191) NOT NULL,
-    `nome` VARCHAR(191) NOT NULL,
-    `senha` VARCHAR(191) NOT NULL,
-    `tipo` ENUM('fiscal', 'administrador') NOT NULL,
+-- CREATE TABLE `fiscal` (
+--     `id` INTEGER NOT NULL,
+--     `cpf` VARCHAR(191) NOT NULL,
+--     `nome` VARCHAR(191) NOT NULL,
+--     `senha` VARCHAR(191) NOT NULL,
+--     `tipo` ENUM('fiscal', 'administrador') NOT NULL,
 
-    UNIQUE INDEX `fiscal_cpf_key`(`cpf`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+--     UNIQUE INDEX `fiscal_cpf_key`(`cpf`),
+--     PRIMARY KEY (`id`)
+-- ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `relatoriodiario` (
@@ -81,4 +81,4 @@ ALTER TABLE `autoinfracao` ADD CONSTRAINT `autoinfracao_id_exemplocaso_fkey` FOR
 ALTER TABLE `autoinfracao` ADD CONSTRAINT `autoinfracao_relatoriodiarioId_fkey` FOREIGN KEY (`relatoriodiarioId`) REFERENCES `relatoriodiario`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `relatoriodiario` ADD CONSTRAINT `relatoriodiario_fiscalId_fkey` FOREIGN KEY (`fiscalId`) REFERENCES `fiscal`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+-- ALTER TABLE `relatoriodiario` ADD CONSTRAINT `relatoriodiario_fiscalId_fkey` FOREIGN KEY (`fiscalId`) REFERENCES `fiscal`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

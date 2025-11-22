@@ -5,8 +5,8 @@ import { cpfToHmac } from 'src/util/crypto.util';
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
-
-  // entrar no sistema
+  
+  //entrar no sistema usando CPF
   findByCpf(cpf: string) {
     // 1. Converte o CPF de plaintext para HMAC
     const hmacCpf = cpfToHmac(cpf);
@@ -20,6 +20,20 @@ export class UserService {
         senha: true, // Corrigido de 'Senha' para 'senha'
         tipo: true, // Corrigido de 'Tipo' para 'tipo'
       },
+    });
+  }
+
+  //buscar usuário por ID
+  findById(id: number) {
+    return this.prisma.fiscal.findUnique({
+      where: { id: id },
+      select: { id: true, cpf: true, nome: true, senha: true, tipo: true },
+    });
+  }
+
+  findAll() {
+    return this.prisma.fiscal.findMany({
+      select: { id: true, nome: true, tipo: true },
     });
   }
 }

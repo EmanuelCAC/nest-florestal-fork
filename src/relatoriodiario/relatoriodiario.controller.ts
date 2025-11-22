@@ -1,6 +1,6 @@
 // src/relatoriodiario/relatoriodiario.controller.ts
 
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { RelatoriodiarioService } from './relatoriodiario.service';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminGuard } from '../auth/guards/admin.guard';
@@ -17,5 +17,12 @@ export class RelatoriodiarioController {
   @IsAdmin()
   findUnprocessed() {
     return this.relatoriodiarioService.findUnprocessedWithRelations();
+  }
+
+  @Post(':id/processar')
+  @UseGuards(AuthGuard('jwt'), AdminGuard)
+  @IsAdmin()
+  markAsProcessed(@Param('id') id: string) {
+    return this.relatoriodiarioService.markAsProcessed(+id)
   }
 }

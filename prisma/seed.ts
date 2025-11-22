@@ -1,26 +1,30 @@
 import { PrismaClient } from '@prisma/client';
 import { cpfToHmac } from 'src/util/crypto.util';
+import * as bcrypt from 'bcrypt';
+import infracoes from './casos.json';
+import { json } from 'stream/consumers';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Iniciando o processo de seeding...');
+  const hashedPasswordAdmin = await bcrypt.hash('admin', 10);
+  const hashedPasswordFiscal = await bcrypt.hash('fiscal', 10);
 
   const cpfAdminOriginal = '111.111.111-11';
   const cpfFiscalOriginal = '222.222.222-22';
 
-  await prisma.autoinfracao.deleteMany({});
-  await prisma.relatoriodiario.deleteMany({});
-  await prisma.fiscal.deleteMany({});
-  await prisma.exemplocaso.deleteMany({});
-  console.log('Banco de dados limpo.');
+//   await prisma.autoinfracao.deleteMany({});
+//   await prisma.relatoriodiario.deleteMany({});
+//   await prisma.fiscal.deleteMany({});
+//   await prisma.exemplocaso.deleteMany({});
+//   console.log('Banco de dados limpo.');
 
   const admin = await prisma.fiscal.create({
     data: {
       id: 1,
       cpf: cpfToHmac(cpfAdminOriginal),
       nome: 'Admin Chefe',
-      senha: 'admin',
+      senha: hashedPasswordAdmin,
       tipo: 'administrador',
     },
   });
@@ -30,25 +34,12 @@ async function main() {
       id: 2,
       cpf: cpfToHmac(cpfFiscalOriginal),
       nome: 'Fiscal de Campo',
-      senha: 'fiscal',
+      senha: hashedPasswordFiscal,
       tipo: 'fiscal',
     },
   });
   console.log('Fiscais criados:', { admin, fiscalComum });
-
-  const exemplo = await prisma.exemplocaso.create({
-    data: {
-      nome_completo: 'Construção Irregular em Área de Preservação',
-      categoria: 'Construção Civil',
-      proc_op: 'Procedimento Padrão',
-      proc_adm: 'Processo Administrativo 123',
-      enq_pen: 'Inquérito Penal 456',
-      enq_adm: 'Inquérito Administrativo 789',
-      modelo: 'Modelo de auto de infração padrão...',
-    },
-  });
-  console.log('Exemplo de caso criado:', exemplo);
-
+  
   const relatorioProcessado = await prisma.relatoriodiario.create({
     data: {
       equipe: 'delta_sede_diurno',
