@@ -1,5 +1,5 @@
 export interface UserPayload {
-  cpf: string;
+  id: number;
   nome: string;
   tipo: string;
   iat?: number; // issued at: data de emissão

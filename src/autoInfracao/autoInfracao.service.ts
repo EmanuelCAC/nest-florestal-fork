@@ -47,7 +47,7 @@ export class AutoInfracaoService {
   async createRelatorio(body: CreateRelatorioDto, requisicao: any) {
     //verificar se fiscal autenticado
     const fiscal = await this.prisma.fiscal.findUnique({
-      where: { cpf: requisicao.cpf },
+      where: { id: requisicao.id },
     });
 
     //verificar se fiscal autenticado
@@ -76,7 +76,7 @@ export class AutoInfracaoService {
           id_exemplocaso: auto.id_exemplocaso,
           descricao: auto.descricao,
           data_emissao: this.convertToISO8601(auto.data),
-          cpf: fiscal.cpf,
+          id_fiscal: fiscal.id,
           relatoriodiarioId: relatorio.id,
         })),
       });
@@ -85,5 +85,4 @@ export class AutoInfracaoService {
     return { status: 'success', message: 'Relatório criado com sucesso' };
   }
 }
-
 
