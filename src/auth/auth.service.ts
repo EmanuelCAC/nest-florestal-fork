@@ -176,7 +176,7 @@ export class AuthService {
     }
 
     // Extrair id do admin autenticado (exemplo: vindo do token)
-    const adminId = extractIdFromToken['id'];
+    const adminId = extractIdFromToken(authorization);
     const adminUser = await this.userService.findById(adminId);
 
     if (!adminUser) {

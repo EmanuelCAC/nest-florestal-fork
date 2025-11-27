@@ -28,8 +28,6 @@ import { tipo_usuario } from 'src/user/entities/user.entity';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  
-
   @UseGuards(AdminGuard)
   @IsAdmin()
   @Post('signup')
