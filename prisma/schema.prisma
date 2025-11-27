@@ -9,7 +9,7 @@ datasource db {
 
 model autoinfracao {
   id                Int              @id @default(autoincrement())
-  data_emissao      DateTime         
+  data_emissao      DateTime
   id_fiscal         Int
   id_exemplocaso    Int
   descricao         String           @db.Text
@@ -71,7 +71,7 @@ model relatoriodiario {
   km_inicio                        String?
   km_final                         String?
   condicoes_vtr                    String?
-  tipo_acao                        TipoAcao
+  tipo_acao                        String
   descricao_veiculos               String?
   km_percorrido                    String
   horas_percorridas                String
@@ -121,15 +121,6 @@ enum Setores {
   caraguatatuba_sul
   alto_da_serra_norte
   alto_da_serra_sul
-}
-
-enum TipoAcao {
-  incursao_viatura
-  incrusao_pe
-  fiscalizacao_embarcada
-  sobrevoo
-  fiscalizacao_drone
-  bloqueio
 }
 
 enum TipoVeiculoAbordado {

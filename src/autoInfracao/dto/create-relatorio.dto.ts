@@ -108,12 +108,13 @@ export class CreateRelatorioDto {
     @IsString()
     condicoes_vtr?: string;
 
-    @IsEnum(tipo_acao)
-    tipo_acao:  tipo_acao;
+    @IsString()
+    tipo_acao:  string;
     
     @IsString()
     veiculos_abordados?: string;
 
+    @IsOptional()
     @IsEnum(tipoVeiculoAbordado)
     tipo_veiculo_abordado?: tipoVeiculoAbordado;
 
