@@ -1,4 +1,5 @@
 import { IsBoolean, IsEnum, isEnum, isIn, IsNumber, IsOptional, IsString, isString } from "class-validator";
+import { Transform } from "class-transformer";
 import { CreateAutoInfracaoDto } from "./create-autoinfracao.dto";
 
 export enum tipo_acao {
@@ -115,6 +116,7 @@ export class CreateRelatorioDto {
     veiculos_abordados?: string;
 
     @IsOptional()
+    @Transform(({ value }) => value === '' ? null : value)
     @IsEnum(tipoVeiculoAbordado)
     tipo_veiculo_abordado?: tipoVeiculoAbordado;
 
