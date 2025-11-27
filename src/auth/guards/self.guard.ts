@@ -34,7 +34,7 @@ export class SelfGuard implements CanActivate {
 
     const decodedToken = jwt.verify(token, secretKey);
 
-    if (decodedToken['cpf'] !== request.params.cpf) {
+    if (decodedToken['id'] !== request.params.id) {
       return false;
     }
 

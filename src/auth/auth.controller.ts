@@ -28,8 +28,6 @@ import { tipo_usuario } from 'src/user/entities/user.entity';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  
-
   @UseGuards(AdminGuard)
   @IsAdmin()
   @Post('signup')
@@ -66,23 +64,7 @@ export class AuthController {
       body.confirmaSenha,
     );
   }
-
-  //fazer rota de reset restrita aos admins
-  @UseGuards(AdminGuard)
-  @Put('reset')
-  @IsAdmin()
-  async updatePassword(@Body() body: updatePassword) {
-    // Para admin resetar senha de usuário por CPF
-    if (!body.cpf) {
-      throw new BadRequestException('CPF é obrigatório para esta operação');
-    }
-    return this.authService.updateOwnPassword(
-      body.novaSenha,
-      body.confirmaSenha,
-      body.cpf,
-    );
-  }
-
+  
   //rota para reset de qualquer usário. Restrita a Admins
   @UseGuards(AdminGuard)
   @IsAdmin()
