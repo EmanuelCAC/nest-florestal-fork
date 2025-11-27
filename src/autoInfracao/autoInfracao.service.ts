@@ -63,7 +63,7 @@ export class AutoInfracaoService {
     // criar relatorio
     const relatorio = await this.prisma.relatoriodiario.create({
       data: {
-        ...sanitizedData,
+        ...rest,
         data_hora_inicio_acao: dataHoraInicioISO,
         data_hora_termino_acao: dataHoraTerminoISO,
         fiscalId: fiscal.id,

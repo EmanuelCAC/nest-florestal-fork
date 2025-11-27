@@ -51,7 +51,7 @@ model fiscal {
 }
 
 model relatoriodiario {
-  id                               Int                  @id @default(autoincrement())
+  id                               Int            @id @default(autoincrement())
   equipe                           Equipe
   equipe_em_atuacao                String
   orgaos_e_instituicoes_envolvadas String
@@ -75,13 +75,13 @@ model relatoriodiario {
   descricao_veiculos               String?
   km_percorrido                    String
   horas_percorridas                String
-  createdAt                        DateTime             @default(now())
-  processado                       Boolean              @default(false)
+  createdAt                        DateTime       @default(now())
+  processado                       Boolean        @default(false)
   fiscalId                         Int
-  tipo_veiculo_abordado            TipoVeiculoAbordado?
+  tipo_veiculo_abordado            String?
   veiculos_abordados               String?
   autoinfracao                     autoinfracao[]
-  fiscal                           fiscal               @relation(fields: [fiscalId], references: [id])
+  fiscal                           fiscal         @relation(fields: [fiscalId], references: [id])
 
   @@index([fiscalId], map: "relatoriodiario_fiscalId_fkey")
 }
