@@ -60,18 +60,6 @@ export class AutoInfracaoService {
     const dataHoraInicioISO = this.convertToISO8601(data_hora_inicio_acao);
     const dataHoraTerminoISO = this.convertToISO8601(data_hora_termino_acao);
 
-    // Sanitizar campos opcionais que podem vir como string vazia
-    const sanitizedData = {
-      ...rest,
-      tipo_veiculo_abordado: rest.tipo_veiculo_abordado || null,
-      placa_vtr: rest.placa_vtr || null,
-      km_inicio: rest.km_inicio || null,
-      km_final: rest.km_final || null,
-      condicoes_vtr: rest.condicoes_vtr || null,
-      veiculos_abordados: rest.veiculos_abordados || null,
-      descricao_veiculos: rest.descricao_veiculos || null,
-    };
-
     // criar relatorio
     const relatorio = await this.prisma.relatoriodiario.create({
       data: {
