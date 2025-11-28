@@ -1,15 +1,6 @@
 import { IsBoolean, IsEnum, IsOptional, IsString } from "class-validator";
 import { CreateAutoInfracaoDto } from "./create-autoinfracao.dto";
 
-export enum tipo_acao {
-  incursao_viatura = 'incursao_viatura',
-  incrusao_pe = 'incrusao_pe',
-  fiscalizacao_embarcada = 'fiscalizacao_embarcada',
-  sobrevoo = 'sobrevoo',
-  fiscalizacao_drone = 'fiscalizacao_drone',
-  bloqueio = 'bloqueio',
-}
-
 export enum equipe {
   charlie_sede_diurno = 'charlie_sede_diurno',
   charlie_rp_diurno = 'charlie_rp_diurno',
@@ -26,26 +17,6 @@ export enum origem {
   denuncia = 'denuncia',
   atendimento_orgaos_externos = 'atendimento_orgaos_externos',
   demanda_soliitacao_inerna = 'demanda_soliitacao_inerna',
-}
-
-export enum municipios {
-  caraguatatuba = 'caraguatatuba',
-  paraibuna = 'paraibuna',
-  natividade_da_serra = 'natividade_da_serra',
-}
-
-export enum setores {
-  caraguatatuba_norte = 'caraguatatuba_norte',
-  caraguatatuba_sul = 'caraguatatuba_sul',
-  alto_da_serra_norte = 'alto_da_serra_norte',
-  alto_da_serra_sul = 'alto_da_serra_sul',
-}
-
-export enum tipoVeiculoAbordado {
-  carro = 'carro',
-  moto = 'moto',
-  caminhao = 'caminhao',
-  onibusVan = 'onibusVan',
 }
 
 
@@ -78,11 +49,14 @@ export class CreateRelatorioDto {
     @IsBoolean()
     area_fiscalizada: boolean;
 
-    @IsEnum(municipios)
-    municipios: municipios;
+    @IsString()
+    municipios: string;
 
-    @IsEnum(setores)
-    setores: setores;
+    @IsString()
+    enderecos: string
+
+    @IsString()
+    setores: string;
 
     @IsString()
     especificacao_local: string;

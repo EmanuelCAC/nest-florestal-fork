@@ -53,33 +53,34 @@ model fiscal {
 model relatoriodiario {
   id                               Int            @id @default(autoincrement())
   equipe                           Equipe
-  equipe_em_atuacao                String
-  orgaos_e_instituicoes_envolvadas String
-  responsavel                      String
+  equipe_em_atuacao                String         @db.Text
+  orgaos_e_instituicoes_envolvadas String         @db.Text
+  responsavel                      String         @db.Text
   data_hora_inicio_acao            DateTime
   data_hora_termino_acao           DateTime
   origem                           Origem
   registro_ocorrencia              Boolean
   area_fiscalizada                 Boolean
-  municipios                       Municipios
-  setores                          Setores
-  especificacao_local              String
-  relatorio                        String
-  outras_atividades                String
-  coordenadas                      String
-  placa_vtr                        String?
-  km_inicio                        String?
-  km_final                         String?
-  condicoes_vtr                    String?
-  tipo_acao                        String
-  descricao_veiculos               String?
-  km_percorrido                    String
-  horas_percorridas                String
+  municipios                       String         @db.Text
+  setores                          String         @db.Text
+  enderecos                        String         @db.Text
+  especificacao_local              String         @db.Text
+  relatorio                        String         @db.Text
+  outras_atividades                String         @db.Text
+  coordenadas                      String         @db.Text
+  placa_vtr                        String?        @db.Text
+  km_inicio                        String?        @db.Text
+  km_final                         String?        @db.Text
+  condicoes_vtr                    String?        @db.Text
+  tipo_acao                        String         @db.Text
+  descricao_veiculos               String?        @db.Text
+  km_percorrido                    String         @db.Text
+  horas_percorridas                String         @db.Text
   createdAt                        DateTime       @default(now())
   processado                       Boolean        @default(false)
   fiscalId                         Int
-  tipo_veiculo_abordado            String?
-  veiculos_abordados               String?
+  tipo_veiculo_abordado            String?        @db.Text
+  veiculos_abordados               String?        @db.Text
   autoinfracao                     autoinfracao[]
   fiscal                           fiscal         @relation(fields: [fiscalId], references: [id])
 
@@ -108,24 +109,4 @@ enum Origem {
   denuncia
   atendimento_orgaos_externos
   demanda_soliitacao_inerna
-}
-
-enum Municipios {
-  caraguatatuba
-  paraibuna
-  natividade_da_serra
-}
-
-enum Setores {
-  caraguatatuba_norte
-  caraguatatuba_sul
-  alto_da_serra_norte
-  alto_da_serra_sul
-}
-
-enum TipoVeiculoAbordado {
-  carro
-  moto
-  caminhao
-  onibusVan
 }
