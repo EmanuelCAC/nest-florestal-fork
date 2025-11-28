@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "cpf": "11111111111",
-  "senha": "admin"
+  "senha": "Admin123"
 }
 
 ### login
@@ -48,7 +48,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6I
 
 ### All users
 GET http://localhost:3000/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkFkbWluIENoZWZlIiwidGlwbyI6IkFkbWluIiwiaWF0IjoxNzY0MjQyNTA0LCJleHAiOjE3NjQyNTY5MDR9.M56RdLAFFHzCr8ixXgyGs5VdlaWX8A3HVEWKdi0aQOI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkFkbWluIENoZWZlIiwidGlwbyI6IkFkbWluIiwiaWF0IjoxNzY0MzYwODQwLCJleHAiOjE3NjQzNzUyNDB9.WSd04CbtSjwdj4ibAA-XAanQe1Urj4SlQ2QPC--R0tA
 
 ### Signup
 POST http://localhost:3000/auth/signup
@@ -73,3 +73,7 @@ Authorization: Bearer
   "novaSenha": "fiscal",
   "confirmaSenha": "fiscal"
 }
+
+### All users
+GET http://localhost:3000/relatorios-diarios/nao-processados
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkFkbWluIENoZWZlIiwidGlwbyI6IkFkbWluIiwiaWF0IjoxNzY0MzYwODQwLCJleHAiOjE3NjQzNzUyNDB9.WSd04CbtSjwdj4ibAA-XAanQe1Urj4SlQ2QPC--R0tA
