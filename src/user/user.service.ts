@@ -31,9 +31,14 @@ export class UserService {
     });
   }
 
-  findAll() {
+  findAll(currentUserId: number) {
     try {
       return this.prisma.fiscal.findMany({
+        where: {
+          id: {
+            not: currentUserId,
+          },
+        },
         select: { id: true, nome: true, tipo: true },
       });
     } catch (error) {
