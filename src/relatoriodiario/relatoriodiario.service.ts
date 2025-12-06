@@ -101,7 +101,33 @@ export class RelatoriodiarioService {
       "Coordenadas Geográficas e referência da coordenada": data?.coordenadas as string,
       "Tipo de Ação": data?.tipo_acao as string,
       "KM Percorridos (Viatura e a pé)": data?.km_percorrido as string,
-      "Horas (Viatura e a pé)": data?.horas_percorridas as string
+      "Horas (Viatura e a pé)": data?.horas_percorridas as string,
     }
+  }
+
+  async getMultipleData(ids: number[]) {
+    const relatorios = await this.prisma.relatoriodiario.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+      include: {
+        autoinfracao: true,
+      },
+    });
+
+    return relatorios.map((data) => {
+      // Remover a relação autoinfracao do objeto e criar objeto base
+      const { autoinfracao, ...baseData } = data;
+
+      // Adicionar autos de infração dinamicamente
+      const autosData = {};
+      autoinfracao.forEach((auto, index) => {
+        autosData[`auto_infracao_${index + 1}`] = auto.descricao ?? '';
+      });
+
+      return { ...baseData, ...autosData };
+    });
   }
 }
