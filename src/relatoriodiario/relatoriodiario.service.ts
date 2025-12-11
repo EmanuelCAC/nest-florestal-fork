@@ -18,6 +18,7 @@ export class RelatoriodiarioService {
             exemplocaso: true,
           },
         },
+        fiscal: true
       },
       orderBy: {
         data_hora_inicio_acao: 'asc',
