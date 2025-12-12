@@ -17,7 +17,12 @@ export class RelatoriodiarioController {
     return this.relatoriodiarioService.findUnprocessedWithRelations();
   }
 
-  @Post(':id/processar')
+  @Get('processados')
+  findProcessed() {
+    return this.relatoriodiarioService.findProcessedWithRelations();
+  }
+
+  @Get(':id/processar')
   markAsProcessed(@Param('id') id: string) {
     return this.relatoriodiarioService.markAsProcessed(+id)
   }

@@ -26,6 +26,25 @@ export class RelatoriodiarioService {
     });
   }
 
+  async findProcessedWithRelations() {
+    return this.prisma.relatoriodiario.findMany({
+      where: {
+        processado: true,
+      },
+      include: {
+        autoinfracao: {
+          include: {
+            exemplocaso: true,
+          },
+        },
+        fiscal: true
+      },
+      orderBy: {
+        data_hora_inicio_acao: 'asc',
+      },
+    });
+  }
+
   async markAsProcessed(id: number) {
     const relatorio = await this.prisma.relatoriodiario.findUnique({
       where: { id },
