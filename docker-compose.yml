@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # Banco de dados MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: nest-florestal-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-nest_florestal_db}
+      MYSQL_USER: ${MYSQL_USER:-nest_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-nest_password}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - nest-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootpassword}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # API NestJS
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nest-florestal-api
+    restart: always
+    environment:
+      PORT: ${PORT:-3000}
+      DATABASE_URL: mysql://${MYSQL_USER:-nest_user}:${MYSQL_PASSWORD:-nest_password}@mysql:3306/${MYSQL_DATABASE:-nest_florestal_db}
+      JWT_SECRET: ${JWT_SECRET:-your_jwt_secret_key_change_this}
+      NODE_ENV: ${NODE_ENV:-production}
+    ports:
+      - "${API_PORT:-3000}:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - nest-network
+    command: >
+      sh -c "
+        npx prisma migrate deploy &&
+        npm run start:prod
+      "
+
+networks:
+  nest-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
