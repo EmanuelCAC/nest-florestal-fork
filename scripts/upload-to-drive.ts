@@ -10,7 +10,7 @@ config();
  */
 async function uploadToGoogleDrive(filePath: string): Promise<void> {
   try {
-    console.log('\n☁️  Iniciando upload para Google Drive...');
+    console.log('\nIniciando upload para Google Drive...');
 
     // Verifica se o arquivo existe
     if (!fs.existsSync(filePath)) {
@@ -43,8 +43,8 @@ async function uploadToGoogleDrive(filePath: string): Promise<void> {
     const fileSize = fs.statSync(filePath).size;
     const fileSizeMB = (fileSize / (1024 * 1024)).toFixed(2);
 
-    console.log(`📄 Arquivo: ${fileName}`);
-    console.log(`📊 Tamanho: ${fileSizeMB} MB`);
+    console.log(`Arquivo: ${fileName}`);
+    console.log(`Tamanho: ${fileSizeMB} MB`);
 
     // ID da pasta do Drive (se especificada)
     const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
@@ -67,7 +67,7 @@ async function uploadToGoogleDrive(filePath: string): Promise<void> {
       body: fs.createReadStream(filePath),
     };
 
-    console.log('⏳ Fazendo upload...');
+    console.log('Fazendo upload...');
 
     // Faz o upload
     const response = await drive.files.create({
@@ -76,13 +76,13 @@ async function uploadToGoogleDrive(filePath: string): Promise<void> {
       fields: 'id, name, size, createdTime, webViewLink',
     });
 
-    console.log('✅ Upload concluído com sucesso!');
-    console.log(`🆔 ID do arquivo: ${response.data.id}`);
-    console.log(`🔗 Link: ${response.data.webViewLink || 'N/A'}`);
+    console.log('Upload concluído com sucesso!');
+    console.log(`ID do arquivo: ${response.data.id}`);
+    console.log(`Link: ${response.data.webViewLink || 'N/A'}`);
 
     return;
   } catch (error: any) {
-    console.error('❌ Erro ao fazer upload para Google Drive:', error.message);
+    console.error('Erro ao fazer upload para Google Drive:', error.message);
     throw error;
   }
 }
@@ -92,11 +92,11 @@ async function uploadToGoogleDrive(filePath: string): Promise<void> {
  */
 async function cleanOldDriveBackups(keepCount: number = 7): Promise<void> {
   try {
-    console.log('\n🧹 Limpando backups antigos do Google Drive...');
+    console.log('\n Limpando backups antigos do Google Drive...');
 
     const credentialsPath = process.env.GOOGLE_CREDENTIALS_PATH;
     if (!credentialsPath || !fs.existsSync(credentialsPath)) {
-      console.log('⚠️  Credenciais não encontradas, pulando limpeza');
+      console.log('Credenciais não encontradas, pulando limpeza');
       return;
     }
 
@@ -124,24 +124,24 @@ async function cleanOldDriveBackups(keepCount: number = 7): Promise<void> {
     });
 
     const files = response.data.files || [];
-    console.log(`📋 Encontrados ${files.length} backup(s) no Drive`);
+    console.log(`Encontrados ${files.length} backup(s) no Drive`);
 
     // Remove backups excedentes
     if (files.length > keepCount) {
       const toDelete = files.slice(keepCount);
-      console.log(`🗑️  Removendo ${toDelete.length} backup(s) antigo(s)...`);
+      console.log(`Removendo ${toDelete.length} backup(s) antigo(s)...`);
 
       for (const file of toDelete) {
         await drive.files.delete({ fileId: file.id! });
         console.log(`   Removido: ${file.name}`);
       }
 
-      console.log(`✅ Limpeza concluída`);
+      console.log(`Limpeza concluída`);
     } else {
-      console.log('✅ Nenhum backup antigo para remover');
+      console.log('Nenhum backup antigo para remover');
     }
   } catch (error: any) {
-    console.error('⚠️  Erro ao limpar backups do Drive:', error.message);
+    console.error('Erro ao limpar backups do Drive:', error.message);
   }
 }
 
@@ -150,18 +150,18 @@ if (require.main === module) {
   const filePath = process.argv[2];
 
   if (!filePath) {
-    console.error('❌ Uso: ts-node upload-to-drive.ts <caminho-do-arquivo>');
+    console.error('Uso: ts-node upload-to-drive.ts <caminho-do-arquivo>');
     process.exit(1);
   }
 
   uploadToGoogleDrive(filePath)
     .then(() => cleanOldDriveBackups(7))
     .then(() => {
-      console.log('\n🎉 Upload concluído com sucesso!');
+      console.log('\n Upload concluído com sucesso!');
       process.exit(0);
     })
     .catch((error) => {
-      console.error('\n💥 Falha no upload:', error.message);
+      console.error('\n Falha no upload:', error.message);
       process.exit(1);
     });
 }

@@ -39,6 +39,31 @@ function parseDatabaseUrl(url: string): BackupConfig {
 }
 
 /**
+ * Tenta encontrar o mysqldump em locais comuns do Windows
+ */
+function findMysqldump(): string | null {
+  const possiblePaths = [
+    'C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysqldump.exe',
+    'C:\\Program Files\\MySQL\\MySQL Server 8.4\\bin\\mysqldump.exe',
+    'C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump.exe',
+    'C:\\Program Files (x86)\\MySQL\\MySQL Server 8.0\\bin\\mysqldump.exe',
+    'C:\\Program Files (x86)\\MySQL\\MySQL Server 8.4\\bin\\mysqldump.exe',
+    'C:\\xampp\\mysql\\bin\\mysqldump.exe',
+    'C:\\wamp64\\bin\\mysql\\mysql8.0.31\\bin\\mysqldump.exe',
+    'C:\\wamp\\bin\\mysql\\mysql5.7.31\\bin\\mysqldump.exe',
+  ];
+
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      console.log(`✅ mysqldump encontrado em: ${p}`);
+      return p;
+    }
+  }
+
+  return null;
+}
+
+/**
  * Cria o diretório de backups se não existir
  */
 function ensureBackupDirectory(): string {
@@ -57,7 +82,7 @@ function generateBackupFilename(database: string): string {
     .toISOString()
     .replace(/[:.]/g, '-')
     .replace('T', '_')
-    .split('Z')[0];
+    .split('.')[0]; // Remove milissegundos
   return `${database}_backup_${timestamp}.sql`;
 }
 
@@ -81,8 +106,21 @@ async function backupDatabase(): Promise<string> {
     console.log(`📁 Diretório de backup: ${backupDir}`);
     console.log(`📄 Arquivo de backup: ${filename}`);
 
-    // Comando mysqldump com credenciais
-    const command = `mysqldump -h ${config.host} -P ${config.port} -u ${config.user} -p${config.password} ${config.database} > "${filepath}"`;
+    // Tenta encontrar mysqldump
+    console.log('🔍 Procurando mysqldump...');
+    const mysqldumpPath = findMysqldump();
+
+    let command: string;
+
+    if (mysqldumpPath) {
+      // Usa o caminho completo encontrado
+      command = `"${mysqldumpPath}" -h ${config.host} -P ${config.port} -u ${config.user} -p${config.password} ${config.database} > "${filepath}"`;
+    } else {
+      // Tenta usar do PATH (pode funcionar se já estiver configurado)
+      console.log('⚠️  mysqldump não encontrado nos caminhos padrão');
+      console.log('🔄 Tentando usar mysqldump do PATH...');
+      command = `mysqldump -h ${config.host} -P ${config.port} -u ${config.user} -p${config.password} ${config.database} > "${filepath}"`;
+    }
 
     console.log('⏳ Executando mysqldump...');
     await execAsync(command);
@@ -100,8 +138,21 @@ async function backupDatabase(): Promise<string> {
     console.log(`📍 Localização: ${filepath}`);
 
     return filepath;
-  } catch (error) {
-    console.error('❌ Erro ao criar backup:', error);
+  } catch (error: any) {
+    console.error('❌ Erro ao criar backup:', error.message);
+    
+    // Mensagem de ajuda se mysqldump não for encontrado
+    if (error.message.includes('reconhecido') || error.message.includes('not found')) {
+      console.error('\n💡 SOLUÇÃO:');
+      console.error('   O mysqldump não foi encontrado no seu sistema.');
+      console.error('   Por favor, informe o caminho da instalação do MySQL.');
+      console.error('\n📍 Procure em pastas como:');
+      console.error('   - C:\\Program Files\\MySQL\\MySQL Server X.X\\bin\\');
+      console.error('   - C:\\xampp\\mysql\\bin\\');
+      console.error('   - C:\\wamp64\\bin\\mysql\\mysqlX.X.XX\\bin\\');
+      console.error('\n⚙️  Ou configure o PATH do Windows (veja BACKUP-README.md)');
+    }
+    
     throw error;
   }
 }
