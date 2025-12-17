@@ -22,7 +22,11 @@
     "prisma:seed": "ts-node prisma/seed.ts",
     "backup": "ts-node scripts/run-backup.ts",
     "backup:local": "ts-node scripts/backup-database.ts",
-    "backup:upload": "ts-node scripts/upload-to-drive.ts"
+    "backup:upload": "ts-node scripts/upload-to-drive.ts",
+    "backup:find-mysql": "ts-node scripts/find-mysql.ts",
+    "backup:test-connection": "ts-node scripts/test-connection.ts",
+    "backup:show-account": "ts-node scripts/show-service-account.ts",
+    "backup:setup-oauth": "ts-node scripts/upload-oauth.ts setup"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

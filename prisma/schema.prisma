@@ -108,5 +108,5 @@ enum Origem {
   dejem_SIMUC
   denuncia
   atendimento_orgaos_externos
-  demanda_soliitacao_inerna
+  demanda_solicitacao_interna
 }
