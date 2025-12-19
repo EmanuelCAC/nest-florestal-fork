@@ -1,5 +1,7 @@
 # Dependências do Google Drive (já instaladas)
 node_modules/
+dist
+dist/*
 
 # Credenciais Google (NUNCA COMMITAR!)
 google-credentials.json
