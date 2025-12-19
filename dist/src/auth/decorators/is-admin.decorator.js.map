@@ -1,0 +1,1 @@
+{"version":3,"file":"is-admin.decorator.js","sourceRoot":"","sources":["../../../../src/auth/decorators/is-admin.decorator.ts"],"names":[],"mappings":";;;AAAA,2CAA6C;AAEhC,QAAA,YAAY,GAAG,SAAS,CAAC;AAC/B,MAAM,OAAO,GAAG,GAAG,EAAE,CAAC,IAAA,oBAAW,EAAC,oBAAY,EAAE,IAAI,CAAC,CAAC;AAAhD,QAAA,OAAO,WAAyC"}

@@ -16,7 +16,7 @@ export enum origem {
   dejem_SIMUC = 'dejem_SIMUC',
   denuncia = 'denuncia',
   atendimento_orgaos_externos = 'atendimento_orgaos_externos',
-  demanda_soliitacao_inerna = 'demanda_soliitacao_inerna',
+  demanda_solicitacao_interna = 'demanda_solicitacao_interna',
 }
 
 
