@@ -11,37 +11,38 @@ export class AutoInfracaoService {
     return exemploDeCasos;
   }
 
-  private convertToISO8601(dateString: string): Date {
-    // Formato esperado: "31/10/2025 20:51"
-    if (!dateString || typeof dateString !== 'string') {
+  private splitDateAndTime(dateTimeString: string): { date: string; time: string } {
+    // Formato esperado: "31/10/2025 20:51" ou "31/10/2025, 20:51"
+    if (!dateTimeString || typeof dateTimeString !== 'string') {
       throw new Error('Invalid date string');
     }
-    dateString = dateString.replace(',', '').trim();
-    const parts = dateString.split(' ');
+    
+    // Remove vírgula e espaços extras
+    dateTimeString = dateTimeString.replace(',', '').trim();
+    
+    const parts = dateTimeString.split(' ');
     if (parts.length !== 2) {
       throw new Error('Date must be in format DD/MM/YYYY HH:MM');
     }
+    
     const [datePart, timePart] = parts;
+    
+    // Valida formato da data
     const dateParts = datePart.split('/');
-    const timeParts = timePart.split(':');
-    if (dateParts.length !== 3 || timeParts.length !== 2) {
+    if (dateParts.length !== 3) {
       throw new Error('Invalid date format');
     }
-    const [day, month, year] = dateParts.map(p => parseInt(p, 10));
-    const [hour, minute] = timeParts.map(p => parseInt(p, 10));
-    if ([day, month, year, hour, minute].some(isNaN)) {
-      throw new Error('Date contains non-numeric values');
+    
+    // Valida formato da hora
+    const timeParts = timePart.split(':');
+    if (timeParts.length !== 2) {
+      throw new Error('Invalid time format');
     }
-    // Optionally, check for valid ranges (day: 1-31, month: 1-12, hour: 0-23, minute: 0-59)
-    if (
-      day < 1 || day > 31 ||
-      month < 1 || month > 12 ||
-      hour < 0 || hour > 23 ||
-      minute < 0 || minute > 59
-    ) {
-      throw new Error('Date contains out-of-range values');
-    }
-    return new Date(year, month - 1, day, hour, minute);
+    
+    return {
+      date: datePart, // formato: "DD/MM/YYYY"
+      time: timePart  // formato: "HH:MM"
+    };
   }
 
   async createRelatorio(body: CreateRelatorioDto, requisicao: any) {
@@ -57,28 +58,38 @@ export class AutoInfracaoService {
 
     // remover autoinfracao do body
     const { autoinfracao, data_hora_inicio_acao, data_hora_termino_acao, ...rest } = body;
-    const dataHoraInicioISO = this.convertToISO8601(data_hora_inicio_acao);
-    const dataHoraTerminoISO = this.convertToISO8601(data_hora_termino_acao);
+    
+    // Separar data e hora para início e término
+    const inicioSplit = this.splitDateAndTime(data_hora_inicio_acao);
+    const terminoSplit = this.splitDateAndTime(data_hora_termino_acao);
 
     // criar relatorio
     const relatorio = await this.prisma.relatoriodiario.create({
       data: {
         ...rest,
-        data_hora_inicio_acao: dataHoraInicioISO,
-        data_hora_termino_acao: dataHoraTerminoISO,
+        data_inicio_acao: inicioSplit.date,
+        hora_inicio_acao: inicioSplit.time,
+        data_termino_acao: terminoSplit.date,
+        hora_termino_acao: terminoSplit.time,
         fiscalId: fiscal.id,
       },
     });
 
     if (autoinfracao) {
       await this.prisma.autoinfracao.createMany({
-        data: autoinfracao.map((auto) => ({
-          id_exemplocaso: auto.id_exemplocaso,
-          descricao: auto.descricao,
-          data_emissao: this.convertToISO8601(auto.data),
-          id_fiscal: fiscal.id,
-          relatoriodiarioId: relatorio.id,
-        })),
+        data: autoinfracao.map((auto) => {
+          const autoSplit = this.splitDateAndTime(auto.data);
+          return {
+            id_exemplocaso: auto.id_exemplocaso,
+            descricao: auto.descricao,
+            data_emissao: autoSplit.date,
+            hora_emissao: autoSplit.time,
+            latitude: auto.latitude,
+            longitude: auto.longitude,
+            id_fiscal: fiscal.id,
+            relatoriodiarioId: relatorio.id,
+          };
+        }),
       });
     }
 

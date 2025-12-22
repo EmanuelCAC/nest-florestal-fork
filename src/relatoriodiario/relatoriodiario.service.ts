@@ -20,9 +20,10 @@ export class RelatoriodiarioService {
         },
         fiscal: true
       },
-      orderBy: {
-        data_hora_inicio_acao: 'asc',
-      },
+      orderBy: [
+        { data_inicio_acao: 'asc' },
+        { hora_inicio_acao: 'asc' }
+      ],
     });
   }
 
@@ -39,9 +40,10 @@ export class RelatoriodiarioService {
         },
         fiscal: true
       },
-      orderBy: {
-        data_hora_inicio_acao: 'asc',
-      },
+      orderBy: [
+        { data_inicio_acao: 'asc' },
+        { hora_inicio_acao: 'asc' }
+      ],
     });
   }
 
@@ -96,33 +98,6 @@ export class RelatoriodiarioService {
       throw new Error('Date contains out-of-range values');
     }
     return new Date(year, month - 1, day, hour, minute);
-  }
-
-  async getData(id: number) {
-    const data = await this.prisma.relatoriodiario.findUnique({
-      where: {id},
-    })
-
-    return {
-      "EQUIPE": data?.equipe as string,
-      "Equipe em Atuação": data?.equipe_em_atuacao as string,
-      "Órgãos e Instituições Envolvidas": data?.orgaos_e_instituicoes_envolvadas as string,
-      "Responsável": data?.responsavel as string,
-      "Data e Hora do Início da Ação": data?.data_hora_inicio_acao.toISOString() as string,
-      "Data e Hora do Término da Ação": data?.data_hora_termino_acao.toISOString() as string,
-      "Origem da Ação": data?.origem as string,
-      "Registro de Ocorrência": data?.registro_ocorrencia  ? 'Sim' : 'Não',
-      "Área Fiscalizada Na Área Protegida":  data?.area_fiscalizada  ? 'Sim' : 'Não',
-      "Município(s)": data?.municipios as string,
-      "Endereço(s)": data?.enderecos as string,
-      "Setores Fiscalizados": data?.setores as string,
-      "Especificação do Local": data?.especificacao_local as string,
-      "Relatório de Fiscalização": data?.relatorio as string,
-      "Coordenadas Geográficas e referência da coordenada": data?.coordenadas as string,
-      "Tipo de Ação": data?.tipo_acao as string,
-      "KM Percorridos (Viatura e a pé)": data?.km_percorrido as string,
-      "Horas (Viatura e a pé)": data?.horas_percorridas as string,
-    }
   }
 
   async getMultipleData(ids: number[]) {

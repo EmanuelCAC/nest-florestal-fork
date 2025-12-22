@@ -4,12 +4,15 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model autoinfracao {
   id                Int              @id @default(autoincrement())
-  data_emissao      DateTime
+  data_emissao      String
+  hora_emissao      String
+  latitude          Float
+  longitude         Float
   id_fiscal         Int
   id_exemplocaso    Int
   descricao         String           @db.Text
@@ -52,18 +55,22 @@ model fiscal {
 
 model relatoriodiario {
   id                               Int            @id @default(autoincrement())
-  equipe                           Equipe
+  equipe                           String         @db.Text
   equipe_em_atuacao                String         @db.Text
   orgaos_e_instituicoes_envolvadas String         @db.Text
   responsavel                      String         @db.Text
-  data_hora_inicio_acao            DateTime
-  data_hora_termino_acao           DateTime
-  origem                           Origem
+  data_inicio_acao                 String
+  data_termino_acao                String
+  hora_inicio_acao                 String
+  hora_termino_acao                String
+  origem                           String         @db.Text
   registro_ocorrencia              Boolean
   area_fiscalizada                 Boolean
   municipios                       String         @db.Text
   setores                          String         @db.Text
   enderecos                        String         @db.Text
+  latitude                         Float
+  longitude                        Float
   especificacao_local              String         @db.Text
   relatorio                        String         @db.Text
   outras_atividades                String         @db.Text
@@ -91,22 +98,4 @@ enum tipo_usuario {
   Campo
   Administrativo
   Admin
-}
-
-enum Equipe {
-  charlie_sede_diurno
-  charlie_rp_diurno
-  charlie_rp_noturno
-  delta_sede_diurno
-  delta_rp_diurno
-  delta_rp_noturno
-}
-
-enum Origem {
-  rotina
-  planejamento_SIMUC
-  dejem_SIMUC
-  denuncia
-  atendimento_orgaos_externos
-  demanda_solicitacao_interna
 }

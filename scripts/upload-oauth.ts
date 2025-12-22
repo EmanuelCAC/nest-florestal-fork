@@ -33,7 +33,12 @@ function createOAuth2Client() {
     );
   }
   
-  const { client_id, client_secret, redirect_uris } = credentials.installed || credentials.web;
+  const config = credentials.installed || credentials.web;
+  if (!config) {
+    throw new Error('Credenciais OAuth não encontradas no arquivo');
+  }
+  
+  const { client_id, client_secret, redirect_uris = ['http://localhost'] } = config;
   return new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 }
 
@@ -100,6 +105,42 @@ async function authenticateOAuth() {
 }
 
 /**
+ * Encontra ou cria a pasta "MPOA" no Google Drive
+ */
+async function findOrCreateMPOAFolder(drive: any): Promise<string> {
+  try {
+    // Procura pela pasta "MPOA"
+    const response = await drive.files.list({
+      q: "name='MPOA' and mimeType='application/vnd.google-apps.folder' and trashed=false",
+      fields: 'files(id, name)',
+      spaces: 'drive',
+    });
+    
+    if (response.data.files && response.data.files.length > 0) {
+      console.log('Pasta MPOA encontrada');
+      return response.data.files[0].id;
+    }
+    
+    // Se não encontrou, cria a pasta
+    console.log('Criando pasta MPOA...');
+    const folderMetadata = {
+      name: 'MPOA',
+      mimeType: 'application/vnd.google-apps.folder',
+    };
+    
+    const folder = await drive.files.create({
+      requestBody: folderMetadata,
+      fields: 'id',
+    });
+    
+    console.log('Pasta MPOA criada com sucesso');
+    return folder.data.id;
+  } catch (error: any) {
+    throw new Error('Erro ao encontrar/criar pasta MPOA: ' + error.message);
+  }
+}
+
+/**
  * Faz upload usando OAuth
  */
 async function uploadToGoogleDriveOAuth(filePath: string): Promise<void> {
@@ -120,17 +161,16 @@ async function uploadToGoogleDriveOAuth(filePath: string): Promise<void> {
     console.log(`Arquivo: ${fileName}`);
     console.log(`Tamanho: ${fileSizeMB} MB`);
     
-    const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
+    // Encontra ou cria a pasta MPOA
+    const mpoaFolderId = await findOrCreateMPOAFolder(drive);
     
     const fileMetadata: any = {
       name: fileName,
       mimeType: 'application/sql',
+      parents: [mpoaFolderId],
     };
     
-    if (folderId) {
-      fileMetadata.parents = [folderId];
-      console.log(`Pasta: ${folderId}`);
-    }
+    console.log(`Pasta: MPOA (${mpoaFolderId})`);
     
     const media = {
       mimeType: 'application/sql',

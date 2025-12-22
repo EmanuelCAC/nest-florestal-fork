@@ -1,29 +1,11 @@
-import { IsBoolean, IsEnum, IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
 import { CreateAutoInfracaoDto } from "./create-autoinfracao.dto";
-
-export enum equipe {
-  charlie_sede_diurno = 'charlie_sede_diurno',
-  charlie_rp_diurno = 'charlie_rp_diurno',
-  charlie_rp_noturno = 'charlie_rp_noturno',
-  delta_sede_diurno = 'delta_sede_diurno',
-  delta_rp_diurno = 'delta_rp_diurno',
-  delta_rp_noturno = 'delta_rp_noturno',
-}
-
-export enum origem {
-  rotina = 'rotina',
-  planejamento_SIMUC = 'planejamento_SIMUC',
-  dejem_SIMUC = 'dejem_SIMUC',
-  denuncia = 'denuncia',
-  atendimento_orgaos_externos = 'atendimento_orgaos_externos',
-  demanda_solicitacao_interna = 'demanda_solicitacao_interna',
-}
 
 
 export class CreateRelatorioDto {
     
-    @IsEnum(equipe)
-    equipe: equipe;
+    @IsString()
+    equipe: string;
 
     @IsString()
     equipe_em_atuacao: string;
@@ -40,8 +22,8 @@ export class CreateRelatorioDto {
     @IsString()
     data_hora_termino_acao: string;
 
-    @IsEnum(origem)
-    origem: origem;
+    @IsString()
+    origem: string;
 
     @IsBoolean()
     registro_ocorrencia: boolean;
@@ -60,6 +42,12 @@ export class CreateRelatorioDto {
 
     @IsString()
     especificacao_local: string;
+
+    @IsNumber()
+    latitude: number;
+
+    @IsNumber()
+    longitude: number;
 
     @IsString()
     relatorio: string;

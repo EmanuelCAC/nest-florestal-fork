@@ -10,4 +10,10 @@ export class CreateAutoInfracaoDto {
 
     @IsString()
     descricao: string;
+
+    @IsNumber()
+    latitude: number;
+
+    @IsNumber()
+    longitude: number;
 }

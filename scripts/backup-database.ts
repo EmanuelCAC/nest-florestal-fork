@@ -21,8 +21,8 @@ interface BackupConfig {
  * Extrai configurações do banco de dados da DATABASE_URL
  */
 function parseDatabaseUrl(url: string): BackupConfig {
-  // Formato: mysql://user:password@host:port/database
-  const regex = /mysql:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/;
+  // Formato: mysql://user:password@host:port/database?params
+  const regex = /mysql:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/([^?]+)/;
   const match = url.match(regex);
 
   if (!match) {
