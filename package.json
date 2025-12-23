@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prisma:generate": "pnpm prisma generate && node scripts/fix-prisma-types.js",
+    "prisma:generate": "pnpm prisma generate",
     "prisma:seed": "ts-node prisma/seed.ts",
     "backup": "ts-node scripts/run-backup.ts",
     "backup:local": "ts-node scripts/backup-database.ts",
