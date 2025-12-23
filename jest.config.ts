@@ -1,5 +1,15 @@
-import { pathsToModuleNameMapper } from 'ts-jest';
+// @ts-nocheck
 import { compilerOptions } from './tsconfig.json';
+
+let moduleNameMapper = {};
+try {
+  const { pathsToModuleNameMapper } = require('ts-jest');
+  moduleNameMapper = pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>/../',
+  });
+} catch (e) {
+  // ts-jest not available, use empty mapper
+}
 
 export default {
   preset: 'ts-jest',
@@ -10,7 +20,5 @@ export default {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/../',
-  }),
+  moduleNameMapper,
 };
