@@ -4,6 +4,7 @@ import { BackupService } from './backup.service';
 import { IsAdmin } from '../auth/decorators/is-admin.decorator';
 import * as path from 'path';
 import * as fs from 'fs';
+import { Express } from 'express'
 
 @Controller('backup')
 export class BackupController {
