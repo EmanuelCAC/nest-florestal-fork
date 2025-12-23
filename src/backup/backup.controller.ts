@@ -4,7 +4,6 @@ import { BackupService } from './backup.service';
 import { IsAdmin } from '../auth/decorators/is-admin.decorator';
 import * as path from 'path';
 import * as fs from 'fs';
-import { Express } from 'express'
 
 @Controller('backup')
 export class BackupController {
@@ -19,7 +18,7 @@ export class BackupController {
   @IsAdmin()
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(FileInterceptor('file'))
-  async restoreBackup(@UploadedFile() file: Express.Multer.File) {
+  async restoreBackup(@UploadedFile() file: any) {
     if (!file) {
       throw new BadRequestException('Arquivo de backup criptografado é obrigatório');
     }
