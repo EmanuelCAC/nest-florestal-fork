@@ -2,6 +2,7 @@
 node_modules/
 dist
 dist/*
+src/generated
 
 # Credenciais Google (NUNCA COMMITAR!)
 google-credentials.json
