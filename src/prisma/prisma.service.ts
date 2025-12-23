@@ -7,7 +7,11 @@ import { Cron } from '@nestjs/schedule';
 export class PrismaService extends PrismaClient {
   constructor(config: ConfigService) {
     super({
-      datasources: { db: { url: process.env.DATABASE_URL } },
+      datasources: {
+        db: {
+          url: config.get('DATABASE_URL'),
+        },
+      },
     });
   }
 
