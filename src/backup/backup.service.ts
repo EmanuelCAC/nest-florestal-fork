@@ -73,62 +73,62 @@ export class BackupService {
     return null;
   }
 
-  @Cron('45 * * * * *')
-  async handleCron() {
-    try {
-      // Criar backup
-      const backupFilePath = await backupDatabase();
+  // @Cron('45 * * * * *')
+  // async handleCron() {
+  //   try {
+  //     // Criar backup
+  //     const backupFilePath = await backupDatabase();
       
-      // Criptografar o backup
-      this.logger.log('Criptografando backup...');
-      const encryptedPath = encryptFile(backupFilePath);
-      this.logger.log(`Backup criptografado salvo em: ${encryptedPath}`);
+  //     // Criptografar o backup
+  //     this.logger.log('Criptografando backup...');
+  //     const encryptedPath = encryptFile(backupFilePath);
+  //     this.logger.log(`Backup criptografado salvo em: ${encryptedPath}`);
       
-      // Remove o arquivo não criptografado
-      fs.unlinkSync(backupFilePath);
-      this.logger.log('Arquivo não criptografado removido');
+  //     // Remove o arquivo não criptografado
+  //     fs.unlinkSync(backupFilePath);
+  //     this.logger.log('Arquivo não criptografado removido');
 
-      // Detectar tipo de autenticação e faz upload
-      try {
-        const credentialsPath = process.env.GOOGLE_CREDENTIALS_PATH || './google-credentials.json';
-        const fullPath = path.join(process.cwd(), credentialsPath);
+  //     // Detectar tipo de autenticação e faz upload
+  //     try {
+  //       const credentialsPath = process.env.GOOGLE_CREDENTIALS_PATH || './google-credentials.json';
+  //       const fullPath = path.join(process.cwd(), credentialsPath);
         
-        if (fs.existsSync(fullPath)) {
-          const credentials = JSON.parse(fs.readFileSync(fullPath, 'utf-8'));
+  //       if (fs.existsSync(fullPath)) {
+  //         const credentials = JSON.parse(fs.readFileSync(fullPath, 'utf-8'));
           
-          // Usa OAuth
-          console.log('\nUsando autenticação OAuth 2.0');
+  //         // Usa OAuth
+  //         console.log('\nUsando autenticação OAuth 2.0');
           
-          await uploadToGoogleDriveOAuth(encryptedPath);
+  //         await uploadToGoogleDriveOAuth(encryptedPath);
           
-          // Remove o backup local após upload bem-sucedido
-          fs.unlinkSync(encryptedPath);
-          this.logger.log('Backup criptografado removido após upload');
+  //         // Remove o backup local após upload bem-sucedido
+  //         fs.unlinkSync(encryptedPath);
+  //         this.logger.log('Backup criptografado removido após upload');
           
-        } else {
-          console.log('\nArquivo de credenciais não encontrado');
-          console.log('Backup local criado, mas não será mantido.\n');
-          // Remove o backup mesmo sem upload
-          fs.unlinkSync(encryptedPath);
-          this.logger.log('Backup criptografado removido');
-        }
+  //       } else {
+  //         console.log('\nArquivo de credenciais não encontrado');
+  //         console.log('Backup local criado, mas não será mantido.\n');
+  //         // Remove o backup mesmo sem upload
+  //         fs.unlinkSync(encryptedPath);
+  //         this.logger.log('Backup criptografado removido');
+  //       }
         
-      } catch (uploadError: any) {
-        console.error('\nErro no upload:', uploadError.message);
-        // Remove o backup mesmo em caso de erro
-        if (fs.existsSync(encryptedPath)) {
-          fs.unlinkSync(encryptedPath);
-          this.logger.log('Backup criptografado removido após erro no upload');
-        }
+  //     } catch (uploadError: any) {
+  //       console.error('\nErro no upload:', uploadError.message);
+  //       // Remove o backup mesmo em caso de erro
+  //       if (fs.existsSync(encryptedPath)) {
+  //         fs.unlinkSync(encryptedPath);
+  //         this.logger.log('Backup criptografado removido após erro no upload');
+  //       }
       
-      }
+  //     }
 
-      process.exit(0);
-    } catch (error: any) {
-      console.error('Erro no processo de backup:', error.message);
-      process.exit(1);
-    }
-  }
+  //     process.exit(0);
+  //   } catch (error: any) {
+  //     console.error('Erro no processo de backup:', error.message);
+  //     process.exit(1);
+  //   }
+  // }
 
   /**
    * Restaura o banco de dados a partir de um backup criptografado
